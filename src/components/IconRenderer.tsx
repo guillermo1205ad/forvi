@@ -15,10 +15,12 @@ import {
   Layout,
   Code2,
   Rocket,
+  ArrowRight, ArrowUpRight, ArrowDown, ArrowUp, Check, Menu, X, Linkedin, Instagram, Facebook, MessageSquare,
   LucideIcon,
 } from 'lucide-react';
 
 const iconMap: Record<string, LucideIcon> = {
+  ArrowRight, ArrowUpRight, ArrowDown, ArrowUp, Check, Menu, X, Linkedin, Instagram, Facebook, MessageSquare,
   Globe,
   Layers,
   Cpu,
@@ -44,5 +46,5 @@ interface IconRendererProps {
 
 export const IconRenderer: React.FC<IconRendererProps> = ({ name, className = 'w-5 h-5', size }) => {
   const IconComponent = iconMap[name] || Code2;
-  return <IconComponent className={className} size={size} />;
+  return <IconComponent aria-hidden="true" className={className} size={size} />;
 };

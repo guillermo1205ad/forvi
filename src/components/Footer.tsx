@@ -1,157 +1,103 @@
-import React from 'react';
-import { SITE_INFO, FOUNDER_CREDENTIALS } from '../data/siteData';
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, ArrowUp } from 'lucide-react';
+import { SITE_INFO } from '../data/siteData';
+import { IconRenderer } from './IconRenderer';
 
-export const Footer: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
+export function Footer() {
   return (
-    <footer className="relative bg-[#000713] text-slate-300 border-t border-forvi-blue-500/20 pt-16 pb-12 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-20 bg-forvi-blue-600/10 blur-[80px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
-          
-          {/* Brand Info */}
-          <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
+    <footer className="border-t border-white/10 bg-[#000713] pb-8 pt-14 text-slate-400">
+      <div className="section-shell">
+        <div className="grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_.8fr_1fr]">
+          <div>
+            <a
+              href="#inicio"
+              className="inline-flex items-center gap-2.5"
+              aria-label="FORVI, volver al inicio"
+            >
               <img
                 src="/logo-symbol.png"
-                alt="FORVI Logo"
-                className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(2,122,241,0.5)]"
+                alt=""
+                width="32"
+                height="36"
+                className="h-9 w-8 object-contain"
               />
-              <div>
-                <span className="text-2xl font-black text-white tracking-wider font-display">
-                  FORVI
-                </span>
-                <span className="block text-xs text-forvi-cyan-400 font-medium -mt-1">
-                  {SITE_INFO.slogan}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Empresa chilena especializada en desarrollo de software a medida e inteligencia artificial aplicada para empresas y pymes. Combinamos visión empresarial e ingeniería de software de alto nivel.
+              <span className="text-2xl font-extrabold tracking-widest text-white">
+                FORVI
+                <span className="text-forvi-cyan-400">.</span>
+              </span>
+            </a>
+            <p className="mt-4 text-sm text-slate-200">{SITE_INFO.slogan}</p>
+            <p className="mt-3 max-w-xs text-xs leading-6">
+              Desarrollo de software e inteligencia artificial aplicada para empresas y pymes en Chile.
             </p>
-
-            <div className="pt-2 flex items-center gap-3">
-              <a
-                href={SITE_INFO.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-[#00102b] hover:bg-pink-950/40 border border-slate-800 hover:border-pink-500/50 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-colors"
-                aria-label="Instagram de FORVI"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-
-              <a
-                href={SITE_INFO.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-[#00102b] hover:bg-blue-950/40 border border-slate-800 hover:border-blue-500/50 text-slate-400 hover:text-blue-400 flex items-center justify-center transition-colors"
-                aria-label="Facebook de FORVI"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-
-              <a
-                href={FOUNDER_CREDENTIALS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-[#00102b] hover:bg-sky-950/40 border border-slate-800 hover:border-sky-500/50 text-slate-400 hover:text-sky-400 flex items-center justify-center transition-colors"
-                aria-label="LinkedIn de Guillermo Peralta"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold">
-              Navegación
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#inicio" className="hover:text-forvi-cyan-400 transition-colors">Inicio</a></li>
-              <li><a href="#servicios" className="hover:text-forvi-cyan-400 transition-colors">Servicios</a></li>
-              <li><a href="#ia" className="hover:text-forvi-cyan-400 transition-colors">Inteligencia Artificial</a></li>
-              <li><a href="#nosotros" className="hover:text-forvi-cyan-400 transition-colors">Nosotros</a></li>
-              <li><a href="#metodologia" className="hover:text-forvi-cyan-400 transition-colors">Cómo trabajamos</a></li>
-              <li><a href="#contacto" className="hover:text-forvi-cyan-400 transition-colors">Contacto</a></li>
-            </ul>
-          </div>
-
-          {/* Services Quick Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold">
-              Soluciones Principales
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#servicios" className="hover:text-slate-200 transition-colors">Sistemas de Gestión ERP/CRM</a></li>
-              <li><a href="#servicios" className="hover:text-slate-200 transition-colors">Aplicaciones Web Cloud</a></li>
-              <li><a href="#servicios" className="hover:text-slate-200 transition-colors">Automatización de Workflows</a></li>
-              <li><a href="#ia" className="hover:text-slate-200 transition-colors">Sistemas RAG & Asistentes</a></li>
-              <li><a href="#ia" className="hover:text-slate-200 transition-colors">OCR Inteligente para Facturas</a></li>
-              <li><a href="#ia" className="hover:text-slate-200 transition-colors">Visión Artificial & Biometría</a></li>
-            </ul>
-          </div>
-
-          {/* Official Contact Info */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold">
-              Contacto Oficial
-            </h4>
-            <div className="space-y-2.5 text-xs text-slate-400">
-              <div className="flex items-start gap-2">
-                <Mail className="w-4 h-4 text-forvi-cyan-400 shrink-0 mt-0.5" />
-                <a href={`mailto:${SITE_INFO.email}`} className="hover:text-white transition-colors">
-                  {SITE_INFO.email}
+            <div className="mt-5 flex gap-2">
+              {[
+                { label: 'Instagram', icon: 'Instagram', url: SITE_INFO.socials.instagram },
+                { label: 'Facebook', icon: 'Facebook', url: SITE_INFO.socials.facebook }
+              ].map(link => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} de FORVI`}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-white"
+                >
+                  <IconRenderer name={link.icon} className="h-4 w-4" />
                 </a>
-              </div>
-              <div className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <a href={SITE_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  {SITE_INFO.phoneDisplay}
-                </a>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                <span>Santiago, Chile</span>
-              </div>
-            </div>
-
-            <div className="pt-2 text-[11px] text-slate-400">
-              <span className="font-semibold text-slate-300">Horario de atención:</span>
-              <br />
-              Lunes a Viernes 09:00 - 18:30 hrs.
+              ))}
             </div>
           </div>
-
-        </div>
-
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <nav aria-label="Navegación del pie de página">
+            <h2 className="mb-5 text-xs font-semibold text-white">Explora FORVI</h2>
+            <ul className="space-y-3 text-xs">
+              {[
+                { label: 'Soluciones a medida', id: 'servicios' },
+                { label: 'Inteligencia artificial', id: 'ia' },
+                { label: 'Cómo trabajamos', id: 'metodologia' },
+                { label: 'Sobre FORVI', id: 'nosotros' },
+                { label: 'Dimensionar mi proyecto', id: 'diagnostico' },
+                { label: 'Preguntas frecuentes', id: 'preguntas' }
+              ].map(link => (
+                <li key={link.id}>
+                  <a href={`#${link.id}`} className="inline-block py-1 hover:text-white">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <div>
-            &copy; {new Date().getFullYear()} {SITE_INFO.name} ({SITE_INFO.legalName}). Todos los derechos reservados.
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors"
+            <h2 className="mb-5 text-xs font-semibold text-white">El próximo paso empieza contigo.</h2>
+            <a
+              href={`mailto:${SITE_INFO.email}`}
+              className="inline-block py-1 text-lg font-medium text-white hover:text-forvi-cyan-300"
             >
-              <span>Volver arriba</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+              {SITE_INFO.email}
+            </a>
+            <a
+              href={SITE_INFO.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center gap-2 text-sm hover:text-white"
+            >
+              {SITE_INFO.phoneDisplay}
+              <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
+            </a>
+            <p className="mt-5 text-xs">{SITE_INFO.location}</p>
+            <a href="#contacto" className="text-link mt-4">
+              Cuéntanos tu proyecto <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
+            </a>
           </div>
         </div>
-
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pb-12 pt-7 text-[11px] sm:pb-0">
+          <p>© {new Date().getFullYear()} {SITE_INFO.legalName}. Todos los derechos reservados.</p>
+          <a
+            href="#inicio"
+            className="mr-12 flex min-h-11 items-center gap-2 hover:text-white"
+          >
+            Volver al inicio <IconRenderer name="ArrowUp" className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </footer>
   );
-};
+}

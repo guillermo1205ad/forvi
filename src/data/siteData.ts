@@ -68,7 +68,7 @@ export const SOFTWARE_SERVICES: ServiceItem[] = [
       'Paneles de administración y dashboards analíticos',
       'Portales de clientes y autogestión comercial',
       'Arquitectura modular escalable y responsive',
-      'Altos estándares de seguridad y respaldos automáticos'
+      'Accesos por roles y estrategia de respaldos'
     ],
     techTags: ['React', 'Node.js', 'PostgreSQL', 'Cloud Native', 'Tailwind']
   },
@@ -76,11 +76,11 @@ export const SOFTWARE_SERVICES: ServiceItem[] = [
     id: 'sistemas-gestion',
     category: 'software',
     title: 'Sistemas de Gestión Empresarial (ERP/CRM)',
-    shortDesc: 'Sistemas a medida para flujos comerciales, inventarios y cobranzas sin licencias abusivas.',
+    shortDesc: 'Sistemas a medida para flujos comerciales, inventarios y cobranzas con un alcance definido.',
     fullDesc: 'Diseñamos sistemas que reflejan exactamente el flujo de valor de tu negocio, permitiéndote gestionar cotizaciones, inventarios, facturación, órdenes de trabajo y seguimiento de clientes.',
     iconName: 'Layers',
-    typicalProblem: 'Contratar ERPs masivos costosos y complejos, donde terminas usando solo el 10% de las funciones pero pagas el 100% de la tarifa mensual.',
-    businessBenefit: 'Herramientas precisas, ágiles y personalizadas que se pagan una vez y crecen al ritmo de tu empresa.',
+    typicalProblem: 'Trabajar con sistemas de gestión que no se adaptan a los procesos de tu empresa.',
+    businessBenefit: 'Herramientas personalizadas que pueden crecer por etapas según las necesidades de tu empresa.',
     capabilities: [
       'Seguimiento integral del ciclo de ventas y CRM',
       'Control de inventario, stock y alertas de reposición',
@@ -131,119 +131,14 @@ export const SOFTWARE_SERVICES: ServiceItem[] = [
     fullDesc: 'Sabemos que las pequeñas y medianas empresas necesitan soluciones directas al grano que resuelvan su problema inmediato sin sobredimensionar la inversión inicial.',
     iconName: 'Wrench',
     typicalProblem: 'Sentir que el desarrollo a medida es un lujo inalcanzable reservado únicamente a grandes corporaciones.',
-    businessBenefit: 'Inversión dimensionada con retorno tangible en productividad y orden empresarial desde las primeras semanas.',
+    businessBenefit: 'Una primera versión centrada en una necesidad concreta, con alcance y presupuesto definidos.',
     capabilities: [
       'Alcance definido por etapas para controlar presupuesto',
       'Curva de aprendizaje mínima para tu equipo de trabajo',
-      'Independencia tecnológica: el código y sistema te pertenecen',
+      'Entrega de código y documentación según el alcance acordado',
       'Soporte técnico cercano y en español'
     ],
     techTags: ['Soluciones Ágiles', 'Bajo Mantenimiento', 'Escalable']
-  }
-];
-
-export const AI_SERVICES: ServiceItem[] = [
-  {
-    id: 'vision-facial',
-    category: 'ai',
-    title: 'Visión por Computador & Reconocimiento Facial',
-    shortDesc: 'Inspección visual automatizada, detección de objetos y control de acceso biométrico.',
-    fullDesc: 'Modelos de visión artificial capaces de procesar video e imágenes para identificar patrones, verificar identidades o detectar anomalías con precisión milimétrica.',
-    iconName: 'ScanFace',
-    typicalProblem: 'Controles de acceso lentos con credenciales que se pierden o inspecciones visuales manuales propensas a fatiga humana.',
-    businessBenefit: 'Seguridad robusta en tiempo real, agilización de accesos y control de calidad estandarizado sin interrupciones.',
-    capabilities: [
-      'Detección y verificación facial para control de accesos',
-      'Conteo de personas o vehículos en recintos y sucursales',
-      'Inspección visual de productos o empaques en líneas de producción',
-      'Detección de elementos de seguridad (EPP, mascarillas, cascos)'
-    ],
-    techTags: ['Computer Vision', 'Deep Learning', 'PyTorch', 'ONNX', 'Edge AI']
-  },
-  {
-    id: 'nlp-analisis',
-    category: 'ai',
-    title: 'Procesamiento de Lenguaje Natural (NLP)',
-    shortDesc: 'Comprensión semántica de textos, contratos, correos y opiniones de clientes.',
-    fullDesc: 'Algoritmos que leen y comprenden el lenguaje humano para clasificar peticiones, analizar contratos legales extensos o extraer información clave de miles de comunicaciones.',
-    iconName: 'MessageSquareCode',
-    typicalProblem: 'Bandejas de entrada saturadas y necesidad de revisar cientos de documentos o reclamos de forma manual.',
-    businessBenefit: 'Clasificación instantánea de mensajes entrantes, detección temprana de riesgos y atención priorizada a clientes.',
-    capabilities: [
-      'Clasificación automática y enrutamiento inteligente de correos',
-      'Análisis de sentimiento y detección de urgencia en feedback',
-      'Extracción de cláusulas críticas en contratos y pólizas',
-      'Generación estructurada de resúmenes ejecutivos'
-    ],
-    techTags: ['Transformers', 'LLMs', 'NLP Semántico', 'Embeddings']
-  },
-  {
-    id: 'asr-transcripcion',
-    category: 'ai',
-    title: 'Reconocimiento del Habla (ASR) & Audio',
-    shortDesc: 'Transcripción precisa de voz a texto y generación automática de minutas de reunión.',
-    fullDesc: 'Modelos avanzados de reconocimiento de voz adaptados al español y modismos locales, capaces de transcribir audios, llamadas y reuniones para convertirlos en texto buscable.',
-    iconName: 'Mic',
-    typicalProblem: 'Perder acuerdos clave discutidos en reuniones orales o audios de WhatsApp por falta de registro escrito estructurado.',
-    businessBenefit: 'Registro permanente y consultable de acuerdos comerciales, minutas generadas en segundos y auditoría de llamadas.',
-    capabilities: [
-      'Transcripción automática con distinción de hablantes (diarización)',
-      'Extracción automática de tareas y compromisos de reuniones',
-      'Transcripción de audios comerciales recibidos por WhatsApp',
-      'Búsqueda textual sobre archivos de audio y video'
-    ],
-    techTags: ['Whisper ASR', 'Diarization', 'Speech-to-Text', 'FastAPI']
-  },
-  {
-    id: 'ocr-documental',
-    category: 'ai',
-    title: 'OCR Inteligente & Extracción Estructurada',
-    shortDesc: 'Transforma facturas, boletas y documentos escaneados en datos digitales listos para usar.',
-    fullDesc: 'Supera las limitaciones del OCR tradicional combinando visión artificial con modelos de lenguaje para extraer tablas, montos, RUTs y fechas incluso en fotos torcidas o documentos físicos.',
-    iconName: 'FileSearch',
-    typicalProblem: 'Personal digitando manualmente montos y datos de facturas en PDF o guías de despacho impresas.',
-    businessBenefit: 'Cero digitación manual, conciliación bancaria y contable instantánea y eliminación de errores numéricos.',
-    capabilities: [
-      'Lectura precisa de facturas, boletas y notas de crédito en PDF/imagen',
-      'Extracción de tablas y filas de productos a formato Excel/JSON',
-      'Validación automática de RUT, totales y coherencia de cálculos',
-      'Integración directa con tu sistema contable o ERP'
-    ],
-    techTags: ['Smart OCR', 'Document AI', 'Layout Analysis', 'RegEx Validation']
-  },
-  {
-    id: 'rag-asistentes',
-    category: 'ai',
-    title: 'Sistemas RAG & Asistentes Inteligentes',
-    shortDesc: 'Chatbots con conocimiento exclusivo y seguro de las políticas y catálogo de tu empresa.',
-    fullDesc: 'Implementamos arquitecturas RAG (Retrieval-Augmented Generation) que permiten a tu equipo y clientes conversar con la documentación interna de tu negocio sin inventar respuestas.',
-    iconName: 'Sparkles',
-    typicalProblem: 'Chatbots genéricos que "alucinan" o no conocen los precios, políticas y especificaciones técnicas de tus productos.',
-    businessBenefit: 'Respuestas 100% fundamentadas en tus documentos oficiales, soporte 24/7 y capacitación instantánea para nuevos colaboradores.',
-    capabilities: [
-      'Asistente de ventas con acceso al catálogo y stock en tiempo real',
-      'Buscador semántico sobre manuales técnicos y normativas',
-      'Protección de datos: tus documentos no se utilizan para entrenar modelos públicos',
-      'Historial de conversaciones y métricas de satisfacción'
-    ],
-    techTags: ['Vector DBs', 'RAG Architecture', 'LlamaIndex', 'LangChain', 'Private AI']
-  },
-  {
-    id: 'grafos-conocimiento',
-    category: 'ai',
-    title: 'Grafos de Conocimiento & Análisis Relacional',
-    shortDesc: 'Mapeo de datos interconectados para descubrir patrones de negocio ocultos.',
-    fullDesc: 'Estructuración de datos en redes relacionales que permiten conectar clientes, productos, proveedores y transacciones para descubrir oportunidades cruzadas o prevenir fraudes.',
-    iconName: 'Network',
-    typicalProblem: 'Bases de datos tradicionales que dificultan entender relaciones multicapa entre personas, empresas y operaciones.',
-    businessBenefit: 'Visión estratégica en 360 grados, identificación de cuellos de botella y detección temprana de anomalías.',
-    capabilities: [
-      'Mapeo de redes de proveedores y dependencias operativas',
-      'Sistemas de recomendación contextual para clientes',
-      'Detección de patrones complejos y relaciones no evidentes',
-      'Visualización interactiva de nodos y flujos de información'
-    ],
-    techTags: ['Knowledge Graphs', 'Neo4j', 'NetworkX', 'Graph Analytics']
   }
 ];
 
@@ -282,25 +177,383 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   }
 ];
 
-export const VALUE_PROPOSITIONS = [
+export const FAQ_ITEMS = [
   {
-    title: 'Visión de Negocio + Tecnología',
-    desc: 'No solo sabemos programar: entendemos de finanzas, operaciones y rentabilidad para diseñar soluciones que generen retorno real.',
-    iconName: 'TrendingUp'
+    question: '¿Necesito tener una idea completamente definida?',
+    answer: 'No. Podemos partir de un problema cotidiano: tareas repetitivas, información dispersa o una herramienta que ya no alcanza. En la primera conversación revisamos el contexto y las prioridades para definir un alcance inicial.',
   },
   {
-    title: 'Presupuestos Honestos y a Escala',
-    desc: 'Diseñamos proyectos pensados para pymes, evitando costos innecesarios y cobros mensuales abusivos por licencias.',
-    iconName: 'Coins'
+    question: '¿Cuánto cuesta un desarrollo a medida?',
+    answer: 'Depende de las funciones, las integraciones y la complejidad del proyecto. Después de entender tu caso, preparamos una propuesta con alcance, etapas y presupuesto. También podemos plantear una primera versión enfocada en lo esencial.',
   },
   {
-    title: 'Software que te Pertenece',
-    desc: 'El software y los datos son de tu empresa. Sin ataduras forzadas ni dependencia de plataformas propietarias opacas.',
-    iconName: 'ShieldCheck'
+    question: '¿Se puede conectar con los sistemas que ya usamos?',
+    answer: 'Evaluamos las herramientas existentes, la disponibilidad de sus APIs y las condiciones de acceso a los datos. Con esa información definimos qué integraciones son viables y cómo implementarlas.',
   },
   {
-    title: 'IA Práctica y Aplicable',
-    desc: 'Implementamos inteligencia artificial orientada a resolver problemas concretos de tu operación, no como simple adorno de marketing.',
-    iconName: 'BrainCircuit'
-  }
+    question: '¿Mi empresa necesita inteligencia artificial?',
+    answer: 'No todos los problemas requieren IA. Primero evaluamos la tarea y los datos disponibles. Si tiene sentido aplicarla, acordamos cómo medir su utilidad y dónde se necesita revisión humana.',
+  },
+  {
+    question: '¿Qué pasa después de la puesta en marcha?',
+    answer: 'Definimos contigo la entrega, la documentación y la capacitación necesarias. Las condiciones de mantenimiento, soporte, infraestructura y propiedad del código se especifican en la propuesta del proyecto.',
+  },
+];
+
+export const HERO_EXAMPLES = [
+  {
+    id: 'software',
+    label: 'Software',
+    icon: 'Layers',
+    title: 'Tu operación, en un solo lugar.',
+    subtitle: 'Del primer pedido al seguimiento de tu cliente.',
+    source: 'Nuevo pedido',
+    sourceDetail: 'Portal de clientes',
+    core: 'Gestión a medida',
+    detail: 'Ventas · Inventario · Operaciones',
+    outputs: [
+      'Stock actualizado',
+      'Equipo coordinado',
+      'Cliente informado',
+    ],
+  },
+  {
+    id: 'automation',
+    label: 'Automatización',
+    icon: 'GitFork',
+    title: 'Menos tareas. Más tiempo.',
+    subtitle: 'Conecta las herramientas que tu equipo ya utiliza.',
+    source: 'Solicitud recibida',
+    sourceDetail: 'Formulario de contacto',
+    core: 'Flujo automatizado',
+    detail: 'Validación · Integración · Seguimiento',
+    outputs: [
+      'Registro en CRM',
+      'Aviso al equipo',
+      'Seguimiento programado',
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'IA aplicada',
+    icon: 'Sparkles',
+    title: 'Tu información, más útil.',
+    subtitle: 'Convierte documentos en respuestas para tu equipo.',
+    source: 'Pregunta del equipo',
+    sourceDetail: 'Consulta sobre un proceso',
+    core: 'Asistente con tus datos',
+    detail: 'Búsqueda · Contexto · Fuentes',
+    outputs: [
+      'Información localizada',
+      'Respuesta con fuentes',
+      'Revisión del equipo',
+    ],
+  },
+];
+
+export const SERVICE_LABELS = [
+  'Aplicaciones y portales',
+  'Sistemas de gestión',
+  'Automatización de procesos',
+  'Integración de herramientas',
+  'Soluciones para pymes',
+];
+
+export const SERVICE_PROBLEMS = [
+  'Tu negocio necesita una plataforma propia.',
+  'La información está en demasiadas planillas.',
+  'Tu equipo repite las mismas tareas cada día.',
+  'Tus sistemas no se comunican entre sí.',
+  'Necesitas empezar por algo concreto.',
+];
+
+export const SERVICE_OUTCOMES = [
+  'Una experiencia pensada para tus clientes y tu equipo.',
+  'Ventas, inventario y operaciones en un mismo lugar.',
+  'Flujos de trabajo que liberan tiempo para lo importante.',
+  'Información conectada, sin volver a digitarla.',
+  'Una primera solución útil, con espacio para crecer.',
+];
+
+export const METHODOLOGY_NAMES = [
+  'Entendemos',
+  'Diseñamos',
+  'Construimos',
+  'Implementamos',
+];
+
+export const METHODOLOGY_DESCRIPTIONS = [
+  'Conversamos sobre tu operación y definimos qué vale la pena resolver primero.',
+  'Damos forma a la solución. Revisas los flujos y las pantallas antes de desarrollar.',
+  'Desarrollamos por etapas, con demostraciones para revisar el avance contigo.',
+  'Ponemos el sistema en marcha, acompañamos a tu equipo y definimos los próximos pasos.',
+];
+
+export const METHODOLOGY_DELIVERABLES = [
+  'Alcance y propuesta',
+  'Prototipo y arquitectura',
+  'Software probado',
+  'Puesta en marcha y capacitación',
+];
+
+export interface AiExample {
+  id: string;
+  label: string;
+  icon: string;
+  technology: string;
+  title: string;
+  description: string;
+  inputTitle: string;
+  input: string;
+  request?: string;
+  outputTitle: string;
+  output: { label: string; value: string }[];
+  benefit: string;
+}
+
+export const AI_EXAMPLES: AiExample[] = [
+  {
+    id: 'documentos',
+    label: 'Consultar documentos',
+    icon: 'Sparkles',
+    technology: 'Asistentes con RAG',
+    title: 'El conocimiento de tu empresa, a mano.',
+    description: 'Un asistente que busca en tus manuales y políticas para ayudar a tu equipo a encontrar respuestas con sus fuentes.',
+    inputTitle: 'Manual de cambios · ejemplo',
+    input: 'Los cambios se aceptan dentro de 10 días, con comprobante de compra y el producto sin uso.',
+    request: '¿Qué necesito para cambiar un producto?',
+    outputTitle: 'Una respuesta con contexto',
+    output: [
+      {
+        label: 'Respuesta',
+        value: 'Presenta el comprobante y el producto sin uso dentro de los 10 días siguientes a la compra.',
+      },
+      {
+        label: 'Fuente consultada',
+        value: 'Manual de cambios · Condiciones generales',
+      },
+      {
+        label: 'Si falta información',
+        value: 'Derivar la consulta al equipo responsable.',
+      },
+    ],
+    benefit: 'Para equipos que responden las mismas preguntas todos los días.',
+  },
+  {
+    id: 'facturas',
+    label: 'Leer facturas',
+    icon: 'FileSearch',
+    technology: 'OCR y extracción de datos',
+    title: 'Del documento al dato que necesitas.',
+    description: 'Extrae campos de facturas, guías o formularios y prepara la información para revisarla e integrarla con tu sistema.',
+    inputTitle: 'Factura · contenido de ejemplo',
+    input: 'Documento N.º 1042\nNeto: $100.000\nIVA (19%): $19.000\nTotal: $119.000',
+    outputTitle: 'Campos listos para revisar',
+    output: [
+      {
+        label: 'Documento',
+        value: 'Factura N.º 1042',
+      },
+      {
+        label: 'Desglose',
+        value: 'Neto $100.000 · IVA $19.000 · Total $119.000',
+      },
+      {
+        label: 'Siguiente paso',
+        value: 'Validar los campos antes de enviarlos al sistema contable.',
+      },
+    ],
+    benefit: 'Para negocios que todavía traspasan documentos a planillas a mano.',
+  },
+  {
+    id: 'imagenes',
+    label: 'Analizar imágenes',
+    icon: 'ScanFace',
+    technology: 'Visión por computador',
+    title: 'Una segunda mirada a tu operación.',
+    description: 'Diseña controles visuales para detectar objetos, contar productos o apoyar la inspección de empaques.',
+    inputTitle: 'Escena de ejemplo',
+    input: 'En una línea de empaque, una caja avanza con una de sus solapas abierta. Una cámara registra la escena.',
+    outputTitle: 'Una observación accionable',
+    output: [
+      {
+        label: 'Objeto de interés',
+        value: 'Caja en la línea de empaque.',
+      },
+      {
+        label: 'Condición a detectar',
+        value: 'Solapa abierta antes del despacho.',
+      },
+      {
+        label: 'Acción propuesta',
+        value: 'Enviar la imagen a una persona para revisar el cierre.',
+      },
+    ],
+    benefit: 'Para operaciones que necesitan apoyar su revisión visual con tecnología.',
+  },
+  {
+    id: 'reuniones',
+    label: 'Resumir reuniones',
+    icon: 'Mic',
+    technology: 'Audio y reconocimiento del habla',
+    title: 'Que los acuerdos no queden en el aire.',
+    description: 'Convierte grabaciones en texto consultable, resúmenes y tareas que tu equipo pueda revisar y compartir.',
+    inputTitle: 'Fragmento de reunión · ejemplo',
+    input: '“Camila enviará la propuesta el viernes. Antes, Diego tiene que confirmar la disponibilidad de los productos.”',
+    outputTitle: 'Acuerdos ordenados',
+    output: [
+      {
+        label: 'Camila',
+        value: 'Enviar la propuesta el viernes.',
+      },
+      {
+        label: 'Diego',
+        value: 'Confirmar la disponibilidad antes del envío.',
+      },
+      {
+        label: 'Pendiente de definir',
+        value: 'Fecha exacta para la confirmación de Diego.',
+      },
+    ],
+    benefit: 'Para equipos que coordinan ventas y operaciones por reuniones o audios.',
+  },
+  {
+    id: 'relaciones',
+    label: 'Conectar información',
+    icon: 'Network',
+    technology: 'Grafos de conocimiento',
+    title: 'Entiende cómo se conecta tu negocio.',
+    description: 'Relaciona clientes, productos, proveedores y operaciones para explorar dependencias que una tabla no muestra fácilmente.',
+    inputTitle: 'Relaciones de ejemplo',
+    input: 'Producto A → Proveedor Norte\nProducto B → Proveedor Norte\nPedido de cliente → Productos A y B',
+    outputTitle: 'Una dependencia visible',
+    output: [
+      {
+        label: 'Relación compartida',
+        value: 'Los productos A y B dependen del mismo proveedor.',
+      },
+      {
+        label: 'Pedido relacionado',
+        value: 'El pedido necesita ambos productos.',
+      },
+      {
+        label: 'Decisión a evaluar',
+        value: 'Revisar disponibilidad y alternativas de abastecimiento.',
+      },
+    ],
+    benefit: 'Para empresas que necesitan entender las relaciones entre sus datos.',
+  },
+];
+
+export const CALCULATOR_TYPE_OPTIONS = [
+  {
+    id: 'erp',
+    label: 'Sistema de gestión',
+    desc: 'Ordenar ventas, clientes e inventario.',
+  },
+  {
+    id: 'web',
+    label: 'Plataforma web',
+    desc: 'Conectar a tu equipo o a tus clientes.',
+  },
+  {
+    id: 'ai',
+    label: 'Inteligencia artificial',
+    desc: 'Trabajar con documentos, imágenes o voz.',
+  },
+  {
+    id: 'auto',
+    label: 'Automatización',
+    desc: 'Conectar herramientas y reducir tareas manuales.',
+  },
+];
+
+export const CALCULATOR_SCALE_OPTIONS = [
+  {
+    id: 'mvp',
+    label: 'Primera versión',
+    timeframe: '2 a 4 semanas',
+    focus: 'Resolver primero una necesidad clave.',
+  },
+  {
+    id: 'full',
+    label: 'Solución completa',
+    timeframe: '4 a 8 semanas',
+    focus: 'Conectar los procesos de un área.',
+  },
+  {
+    id: 'enterprise',
+    label: 'Varias áreas',
+    timeframe: '8 a 12 semanas',
+    focus: 'Integrar equipos, sedes y operaciones.',
+  },
+];
+
+export const CALCULATOR_INTEGRATION_OPTIONS = [
+  {
+    id: 'whatsapp',
+    label: 'Notificaciones por WhatsApp',
+  },
+  {
+    id: 'sii',
+    label: 'Facturación / SII',
+  },
+  {
+    id: 'payments',
+    label: 'Pagos en línea',
+  },
+  {
+    id: 'excel',
+    label: 'Datos de Excel o bases de datos',
+  },
+  {
+    id: 'security',
+    label: 'Roles y permisos',
+  },
+];
+
+export const CONTACT_PROJECT_OPTIONS = [
+  {
+    value: 'software',
+    label: 'Software a medida',
+  },
+  {
+    value: 'erp',
+    label: 'Sistema de gestión / ERP / CRM',
+  },
+  {
+    value: 'ia',
+    label: 'Inteligencia artificial aplicada',
+  },
+  {
+    value: 'ocr',
+    label: 'Lectura y extracción de documentos',
+  },
+  {
+    value: 'automatizacion',
+    label: 'Automatización e integraciones',
+  },
+  {
+    value: 'otro',
+    label: 'Necesito orientación',
+  },
+];
+
+export const CONTACT_BUDGET_OPTIONS = [
+  {
+    value: 'flexible',
+    label: 'Por definir con FORVI',
+  },
+  {
+    value: 'mvp',
+    label: 'Una primera versión para empezar',
+  },
+  {
+    value: 'medio',
+    label: 'Una solución completa para mi pyme',
+  },
+  {
+    value: 'corporativo',
+    label: 'Un proyecto a escala empresarial',
+  },
 ];
