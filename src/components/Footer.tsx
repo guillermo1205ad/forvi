@@ -26,7 +26,7 @@ export function Footer() {
             </a>
             <p className="mt-4 text-sm text-slate-200">{SITE_INFO.slogan}</p>
             <p className="mt-3 max-w-xs text-xs leading-6">
-              Desarrollo de software e inteligencia artificial aplicada para empresas y pymes en Chile.
+              Consultoría en análisis de datos y metodología para investigación, instituciones y empresas.
             </p>
             <div className="mt-5 flex gap-2">
               {[
@@ -50,11 +50,11 @@ export function Footer() {
             <h2 className="mb-5 text-xs font-semibold text-white">Explora FORVI</h2>
             <ul className="space-y-3 text-xs">
               {[
-                { label: 'Soluciones a medida', id: 'servicios' },
-                { label: 'Inteligencia artificial', id: 'ia' },
+                { label: 'Servicios de análisis', id: 'servicios' },
+                { label: 'Entregables', id: 'entregables' },
                 { label: 'Cómo trabajamos', id: 'metodologia' },
                 { label: 'Sobre FORVI', id: 'nosotros' },
-                { label: 'Dimensionar mi proyecto', id: 'diagnostico' },
+                { label: 'Cotiza tu análisis', id: 'contacto' },
                 { label: 'Preguntas frecuentes', id: 'preguntas' }
               ].map(link => (
                 <li key={link.id}>

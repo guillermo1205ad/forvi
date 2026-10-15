@@ -7,10 +7,8 @@ const payload = {
   from_name: 'Prueba local',
   name: 'Prueba local',
   email: 'test@example.invalid',
-  phone: '',
-  company: 'Prueba',
-  service: 'Software a medida',
-  budget: 'Por definir',
+  data_type: 'Encuestas',
+  desired_deadline: 'Por definir',
   message: 'Este mensaje nunca se envía a la red.',
   recipient: 'recipient@example.invalid',
 };

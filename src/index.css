@@ -5,7 +5,7 @@
 @layer base {
   :root { color-scheme: dark; --bg-primary: #000a18; --bg-surface: #071a32; }
   html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-  body { margin: 0; min-width: 320px; background: var(--bg-primary); color: #f1f5f9; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; min-width: 0; background: var(--bg-primary); color: #f1f5f9; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   * { box-sizing: border-box; }
   button, a, input, select, textarea, summary { -webkit-tap-highlight-color: transparent; }
   button, a, summary { touch-action: manipulation; }
@@ -37,7 +37,7 @@
 .hero-section { position: relative; overflow: hidden; padding-top: 145px; background: linear-gradient(135deg, #000a18 25%, #001025 100%); }
 .hero-glow { position: absolute; width: 800px; height: 800px; right: -280px; top: -100px; background: radial-gradient(circle, #027af11c, transparent 65%); pointer-events: none; }
 .hero-layout { display: grid; grid-template-columns: 1.13fr 1fr; gap: 54px; align-items: center; padding-bottom: 72px; }
-.hero-copy h1 { font-size: clamp(44px, 4.5vw, 61px); line-height: 1.105; letter-spacing: -.058em; font-weight: 650; }
+.hero-copy h1 { font-size: clamp(44px, 4.6vw, 60px); line-height: 1.105; letter-spacing: -.058em; font-weight: 650; }
 .hero-accent { color: #78baff; }
 .hero-description { max-width: 500px; margin-top: 27px; font-size: 15px; line-height: 1.85; color: #a2b1c6; }
 .hero-visual { position: relative; padding-top: 14px; }
@@ -45,7 +45,7 @@
 .workspace-topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 17px 21px; font-size: 10px; color: #a8b9d0; border-bottom: 1px solid #ffffff0d; }
 .demo-label { font: 8px 'JetBrains Mono', monospace; letter-spacing: .12em; border: 1px solid #ffffff1c; border-radius: 4px; padding: 4px 6px; color: #a8b9d0; }
 .workspace-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 9px 15px; background: #000a183d; border-bottom: 1px solid #ffffff0d; }
-.workspace-tabs button { display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 5px; padding: 10px 5px; color: #9cacbf; font-size: 10px; transition: background .2s; }
+.workspace-tabs button { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 5px; padding: 10px 5px; color: #9cacbf; font-size: 10px; transition: background .2s; }
 .workspace-tabs button[aria-pressed='true'] { background: #027af121; color: #85c5ff; box-shadow: inset 0 0 0 1px #027af129; }
 .workspace-tabs button:hover { background: #ffffff09; }
 .workspace-content { padding: 27px 28px 25px; }
@@ -150,3 +150,6 @@
 
 /* Secondary text remains readable on the dark brand surfaces. */
 .text-slate-500 { color: #8494ab; }
+
+/* Keep useful links from the previous one-page layout. */
+.legacy-anchor { scroll-margin-top: 100px; }

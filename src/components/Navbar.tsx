@@ -3,8 +3,8 @@ import { IconRenderer } from './IconRenderer';
 import { SITE_INFO } from '../data/siteData';
 
 const links = [
-  { label: 'Soluciones', id: 'servicios' },
-  { label: 'IA aplicada', id: 'ia' },
+  { label: 'Servicios', id: 'servicios' },
+  { label: 'Entregables', id: 'entregables' },
   { label: 'Cómo trabajamos', id: 'metodologia' },
   { label: 'Sobre FORVI', id: 'nosotros' },
 ];
@@ -96,7 +96,7 @@ export function Navbar() {
             onClick={() => setOpen(false)}
             className="button-primary nav-cta"
           >
-            Hablemos <IconRenderer name="ArrowUpRight" />
+            Cotizar <IconRenderer name="ArrowUpRight" />
           </a>
           <button
             ref={toggle}
@@ -131,11 +131,11 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#diagnostico"
+            href="#preguntas"
             onClick={() => setOpen(false)}
             className="py-4 text-slate-200"
           >
-            Dimensionar mi proyecto
+            Preguntas frecuentes
           </a>
           <a
             href={SITE_INFO.whatsappUrl}

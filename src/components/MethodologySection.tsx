@@ -1,18 +1,43 @@
-import {
-  WORKFLOW_STEPS,
-  METHODOLOGY_NAMES as names,
-  METHODOLOGY_DESCRIPTIONS as descriptions,
-  METHODOLOGY_DELIVERABLES as deliverables,
-} from '../data/siteData';
 import { IconRenderer } from './IconRenderer';
+
+const ANALYSIS_PROCESS = [
+  {
+    step: '01',
+    title: 'Revisamos',
+    description:
+      'Conversamos sobre tus objetivos y fuentes. Evaluamos la calidad, la pertinencia y la viabilidad del material disponible.',
+    deliverable: 'Contexto y necesidades de análisis',
+    icon: 'FileSearch',
+  },
+  {
+    step: '02',
+    title: 'Acordamos',
+    description:
+      'Definimos el alcance, los entregables, el precio y el plazo de acuerdo con las características de tu proyecto.',
+    deliverable: 'Propuesta personalizada',
+    icon: 'Compass',
+  },
+  {
+    step: '03',
+    title: 'Analizamos',
+    description:
+      'Aplicamos los métodos acordados y documentamos las decisiones, los supuestos y las limitaciones del análisis.',
+    deliverable: 'Análisis según el alcance definido',
+    icon: 'ChartColumn',
+  },
+  {
+    step: '04',
+    title: 'Explicamos',
+    description:
+      'Entregamos los resultados y los revisamos contigo para que comprendas su interpretación y puedas resolver tus dudas.',
+    deliverable: 'Entrega y sesión explicativa',
+    icon: 'MessageSquare',
+  },
+];
 
 export function MethodologySection() {
   return (
-    <section
-      id="metodologia"
-      aria-labelledby="method-title"
-      className="section-spacing"
-    >
+    <section id="metodologia" aria-labelledby="method-title" className="section-spacing">
       <div className="section-shell">
         <div className="section-heading mb-0">
           <div>
@@ -20,52 +45,39 @@ export function MethodologySection() {
             <h2 id="method-title">
               Un proceso claro.
               <br />
-              <span className="text-slate-400">De la idea a la operación.</span>
+              <span className="text-slate-400">De la pregunta al resultado.</span>
             </h2>
           </div>
           <p>
-            Sabes qué estamos construyendo, por qué y cuál es el siguiente paso.
-            Participas en las decisiones que importan.
+            Sabes qué vamos a analizar, cómo lo abordaremos y qué recibirás. El alcance se
+            acuerda antes de iniciar el trabajo.
           </p>
         </div>
 
         <ol className="process-grid">
-          {WORKFLOW_STEPS.map((step, index) => (
-            <li key={step.step} className="process-step">
+          {ANALYSIS_PROCESS.map(item => (
+            <li key={item.step} className="process-step">
               <div className="flex items-start justify-between">
-                <span className="process-number">{step.step}</span>
-                <IconRenderer
-                  name={step.iconName}
-                  className="h-5 w-5 text-slate-500"
-                />
+                <span className="process-number">{item.step}</span>
+                <IconRenderer name={item.icon} className="h-5 w-5 text-slate-400" />
               </div>
-              <h3 className="text-xl font-semibold tracking-tight">
-                {names[index]}
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-slate-400">
-                {descriptions[index]}
-              </p>
+              <h3 className="text-xl font-semibold tracking-tight">{item.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-slate-400">{item.description}</p>
               <p className="mt-5 flex items-start gap-2 text-xs leading-5 text-slate-300">
-                <IconRenderer
-                  name="Check"
-                  className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forvi-cyan-300"
-                />
-                {deliverables[index]}
+                <IconRenderer name="Check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forvi-cyan-300" />
+                {item.deliverable}
               </p>
             </li>
           ))}
         </ol>
 
-        <p className="mt-12 border-t border-white/10 pt-6 text-sm text-slate-400">
-          Primero, una conversación.{' '}
-          <a
-            className="ml-1 inline-flex items-center gap-2 font-medium text-forvi-cyan-300 hover:text-white"
-            href="#contacto"
-          >
-            Cuéntanos qué tienes en mente{' '}
-            <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
-          </a>
-        </p>
+        <div className="mt-12 grid gap-5 rounded-xl border border-white/10 bg-white/[.02] p-6 sm:grid-cols-[.65fr_1.35fr] sm:gap-10">
+          <h3 className="text-sm font-medium text-white">Ajustes con un alcance claro</h3>
+          <p className="text-sm leading-7 text-slate-400">
+            Incluimos una ronda de ajustes dentro del alcance acordado. La incorporación de
+            nuevos datos u objetivos requiere reevaluar el alcance, el precio y el plazo.
+          </p>
+        </div>
       </div>
     </section>
   );

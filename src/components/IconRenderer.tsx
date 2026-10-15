@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  ChartColumn,
+  BarChart3,
   Globe,
   Layers,
   Cpu,
@@ -21,6 +23,8 @@ import {
 
 const iconMap: Record<string, LucideIcon> = {
   ArrowRight, ArrowUpRight, ArrowDown, ArrowUp, Check, Menu, X, Linkedin, Instagram, Facebook, MessageSquare,
+  ChartColumn,
+  BarChart3,
   Globe,
   Layers,
   Cpu,

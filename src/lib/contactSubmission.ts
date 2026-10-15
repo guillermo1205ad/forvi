@@ -3,10 +3,8 @@ export interface ContactSubmissionPayload {
   from_name: string;
   name: string;
   email: string;
-  phone: string;
-  company: string;
-  service?: string;
-  budget?: string;
+  data_type: string;
+  desired_deadline: string;
   message: string;
   recipient: string;
 }

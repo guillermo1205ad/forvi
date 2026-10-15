@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { HERO_EXAMPLES as examples } from '../data/siteData';
+import { HERO_EXAMPLES as examples, SITE_INFO } from '../data/siteData';
 import { IconRenderer } from './IconRenderer';
+import { ResearchFlowMotion } from './ResearchFlowMotion';
+import './research-motion.css';
 
 export function Hero() {
   const [selected, setSelected] = useState(0);
@@ -14,28 +16,27 @@ export function Hero() {
           <div className="hero-copy">
             <p className="eyebrow mb-7">
               <span className="h-1.5 w-1.5 rounded-full bg-forvi-cyan-400" />{' '}
-              SOFTWARE & IA · HECHO EN CHILE
+              ANÁLISIS DE DATOS · INVESTIGACIÓN
             </p>
             <h1 id="hero-title">
-              Software a tu medida.
+              Transformamos datos{' '}
               <br />
-              <span className="hero-accent">Inteligencia para tu negocio.</span>
+              <span className="hero-accent">en conocimiento</span>
             </h1>
             <p className="hero-description">
-              Ordena tu operación, conecta tus sistemas y automatiza tareas con software e inteligencia
-              artificial diseñados para tu empresa.
+              {SITE_INFO.heroSubheadline}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#contacto" className="button-primary">
-                Conversemos sobre tu proyecto <IconRenderer name="ArrowUpRight" />
+                Cotiza tu análisis <IconRenderer name="ArrowUpRight" />
               </a>
-              <a href="#servicios" className="button-secondary">
-                Explorar soluciones <IconRenderer name="ArrowDown" className="h-4 w-4" />
+              <a href={SITE_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+                Conversemos sobre tu proyecto <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
               </a>
             </div>
             <p className="mt-5 flex items-center gap-2 text-xs leading-relaxed text-slate-400">
               <IconRenderer name="Check" className="h-4 w-4 shrink-0 text-forvi-cyan-300" />{' '}
-              Para empresas y pymes. Empecemos por lo que necesitas resolver.
+              Para tesistas de pregrado y posgrado, investigadores y equipos.
             </p>
           </div>
           <div className="hero-visual">
@@ -43,14 +44,14 @@ export function Hero() {
               <div className="workspace-topbar">
                 <span className="flex items-center gap-2">
                   <img src="/logo-symbol.png" alt="" width="16" height="19" /> FORVI{' '}
-                  <span className="text-slate-500">/</span> Tu próximo sistema
+                  <span className="text-slate-500">/</span> Tu investigación
                 </span>
                 <span className="demo-label">EJEMPLO</span>
               </div>
               <div
                 className="workspace-tabs"
                 role="group"
-                aria-label="Explorar soluciones de ejemplo"
+                aria-label="Explorar recorridos de análisis ilustrativos"
               >
                 {examples.map((item, index) => (
                   <button
@@ -65,92 +66,37 @@ export function Hero() {
                   </button>
                 ))}
               </div>
-              <div
-                id="hero-example"
-                className="workspace-content"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <div className="mb-7">
+              <div id="hero-example" className="workspace-content">
+                <div className="mb-5" aria-live="polite" aria-atomic="true">
                   <h2 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
                     {example.title}
                   </h2>
                   <p className="mt-2 text-xs leading-relaxed text-slate-400">{example.subtitle}</p>
                 </div>
-                <div className="flow-source">
-                  <span className="flow-icon">
-                    <IconRenderer name={example.icon} className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium text-white">{example.source}</p>
-                    <p className="mt-1 text-xs text-slate-400">{example.sourceDetail}</p>
-                  </div>
-                  <span className="ml-auto text-[10px] font-mono text-slate-500">01</span>
-                </div>
-                <div className="flow-connector" aria-hidden="true">
-                  <span />
-                </div>
-                <div className="flow-engine">
-                  <img
-                    src="/logo-symbol.png"
-                    alt=""
-                    width="45"
-                    height="52"
-                    className="h-14 w-12 object-contain"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-white">{example.core}</p>
-                    <p className="mt-1.5 text-[11px] text-blue-200/75">{example.detail}</p>
-                  </div>
-                  <IconRenderer
-                    name="Sparkles"
-                    className="ml-auto h-4 w-4 shrink-0 text-forvi-cyan-300"
-                  />
-                </div>
-                <div className="flow-connector" aria-hidden="true">
-                  <span />
-                </div>
-                <div className="flow-output">
-                  {example.outputs.map(output => (
-                    <div key={output} className="flex items-center gap-2.5">
-                      <IconRenderer
-                        name="Check"
-                        className="h-3.5 w-3.5 shrink-0 text-forvi-cyan-300"
-                      />
-                      <span>{output}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="workspace-bottom">
-                <span className="flex items-center gap-1.5">
-                  <IconRenderer name="GitFork" className="h-3.5 w-3.5" />{' '}
-                  Diseñado alrededor de tu negocio
-                </span>
-                <span aria-hidden="true">↗</span>
+                <ResearchFlowMotion key={example.id} example={example} />
               </div>
             </div>
             <div className="visual-caption">
               <span className="h-px w-7 bg-forvi-cyan-400/50" />{' '}
-              Una idea de lo que podemos construir contigo.
+              Cada propuesta define sus técnicas y entregables.
             </div>
           </div>
         </div>
         <div className="hero-principles">
           <div>
             <span className="principle-index">01 /</span>
-            <span>Tu negocio primero</span>
-            <span className="principle-detail">Entendemos antes de desarrollar</span>
+            <span>Tu pregunta primero</span>
+            <span className="principle-detail">Objetivos y fuentes antes de analizar</span>
           </div>
           <div>
             <span className="principle-index">02 /</span>
             <span>Alcance claro</span>
-            <span className="principle-detail">Prioridades, etapas y entregables</span>
+            <span className="principle-detail">Precio, plazo y entregables acordados</span>
           </div>
           <div>
             <span className="principle-index">03 /</span>
-            <span>Tecnología con propósito</span>
-            <span className="principle-detail">Soluciones para tu operación real</span>
+            <span>Resultados con contexto</span>
+            <span className="principle-detail">Interpretación y sesión explicativa</span>
           </div>
         </div>
       </div>

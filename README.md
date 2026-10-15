@@ -1,8 +1,8 @@
-# FORVI — Sitio corporativo
+# FORVI — Análisis de datos y metodología de investigación
 
-Software a tu medida. Inteligencia para tu negocio.
+Transformamos datos en conocimiento.
 
-Sitio oficial: [www.forvi.cl](https://www.forvi.cl). React 18, TypeScript, Vite 6 y Tailwind CSS. Despliegue estático mediante GitHub Actions y GitHub Pages.
+Sitio oficial: [www.forvi.cl](https://www.forvi.cl). Proyecto existente en React 18, TypeScript, Vite 6 y Tailwind CSS. Publicación estática en GitHub Pages con el dominio propio conservado.
 
 ## Desarrollo
 
@@ -16,48 +16,58 @@ npm run build
 npm run preview
 ```
 
-`npm run build` comprueba TypeScript y genera `dist/`. Antes de cualquier commit, ejecutar las pruebas y la compilación. El flujo de despliegue también ejecuta ambos pasos con Node 22.
+El build comprueba TypeScript y genera `dist/`. Ejecutar pruebas y build antes de preparar una publicación. Compilar localmente no publica el sitio.
 
 ## Contenido y componentes
 
-- `src/data/siteData.ts`: datos oficiales, servicios, ejemplos, preguntas frecuentes y opciones del diagnóstico/formulario.
-- `src/components/Hero.tsx`: portada con tres flujos ilustrativos de software, automatización e IA.
-- `src/components/ServicesSection.tsx`: selector de cinco soluciones y capacidades.
-- `src/components/AiSection.tsx`: cinco ejemplos de IA con pestañas accesibles. Son contenido de muestra; no se ejecutan modelos.
-- `src/components/ProjectCalculator.tsx`: diagnóstico de alcance y resumen para WhatsApp o formulario. Los plazos son referencias iniciales, no cotizaciones.
-- `src/components/ContactSection.tsx`: formulario con validación, honeypot, estado de envío y recuperación ante errores.
-- `src/lib/contactSubmission.ts`: integración existente con Web3Forms; solo acepta confirmación HTTP correcta y `success: true`.
-- `src/lib/projectInquiry.ts`: incorpora el diagnóstico sin borrar el mensaje escrito por el visitante ni duplicar el resumen anterior.
-- `src/components/IconRenderer.tsx`: registro explícito de iconos para conservar tree-shaking.
-- `src/index.css`: sistema visual, estilos responsive, foco y movimiento reducido.
+- `src/data/siteData.ts`: contactos oficiales, propuesta de valor, credenciales, preguntas frecuentes y recorridos ilustrativos de análisis.
+- `src/components/Hero.tsx`: portada con ejemplos cuantitativo, cualitativo y multimodal; no ejecuta modelos ni analiza datos del visitante.
+- `src/components/ResearchFlowMotion.tsx` y `research-motion.css`: recorrido ilustrativo de fuentes, métodos y resultados en 6,3 segundos, con pausa, reanudación y repetición. Sin bucle ni dependencias añadidas. La preferencia de movimiento reducido activa una vista estática.
+- `src/components/ServicesSection.tsx`: los cuatro servicios y sus capacidades, sujetos a pertinencia metodológica.
+- `src/components/DeliverablesSection.tsx`: informe, resultados, interpretación, supuestos, limitaciones y sesión explicativa, según cada propuesta.
+- `src/components/MethodologySection.tsx`: evaluación, acuerdo, análisis y entrega; una ronda de ajustes dentro del alcance.
+- `src/components/AboutSection.tsx`: enfoque profesional de Guillermo Peralta y credenciales secundarias.
+- `src/components/ContactSection.tsx`: nombre, correo, objetivo, tipo de datos y plazo deseado. Sin archivos adjuntos, datos sensibles ni campos comerciales innecesarios.
+- `src/lib/contactSubmission.ts`: integración existente con Web3Forms conservada como código técnico, sin activar en la interfaz. Solo acepta HTTP correcto con `success: true` para una futura reactivación verificada.
+- `src/index.css`: identidad visual, responsive, foco visible y movimiento reducido.
+- `src/assets/og-investigacion.svg`: fuente editable de la nueva composición social; usa el símbolo original sin alterarlo. El PNG final se sirve desde `public/og-investigacion.png`.
+
+Se conservan los símbolos y favicon oficiales. Las piezas con el eslogan anterior se retiraron. El nombre y símbolo se componen en la interfaz sin un eslogan dentro del logo. No se importaron piezas finales externas de la nueva propuesta.
 
 ## Verificación
 
-Las pruebas usan respuestas simuladas y no envían consultas reales. Cubren la confirmación del proveedor, errores HTTP, JSON inválido, errores de red, cancelación y conservación del mensaje al trasladar el diagnóstico.
+Las pruebas unitarias usan respuestas simuladas y no envían consultas reales. Revisar antes de publicar:
 
-Revisión manual recomendada antes de publicar:
+1. Build y pruebas automatizadas.
+2. Escritorio y móvil sin desbordamiento horizontal, menú y foco por teclado.
+3. Selectores de portada y servicios, controles del recorrido animado, preguntas frecuentes y navegación por anclas.
+4. Validación del formulario, preparación de correo, edición sin pérdida del texto y enlaces de contacto directo.
+5. Enlaces oficiales, metadatos, datos estructurados, imágenes y ausencia de mensajes comerciales anteriores.
 
-1. Navegación a 320, 390, 768, 1024 y 1440 px, sin desplazamiento horizontal del documento.
-2. Menú móvil/tablet, cierre con Escape y navegación a las secciones.
-3. Pestañas de IA mediante flechas, Home y End; servicios y ejemplos de portada.
-4. Diagnóstico, cambios de opciones, enlaces a WhatsApp y traspaso al formulario.
-5. Validación de campos, foco en el primer error y enlaces de contacto.
+La comprobación real de esta versión no confirmó Web3Forms: el navegador mostró error y el diagnóstico del endpoint recibió una página HTML de verificación de Cloudflare. No se eludió la verificación ni se cambió la clave. Por ello, el formulario prepara un correo editable y permite abrir la aplicación de correo para enviarlo; WhatsApp permanece como canal directo. No muestra confirmaciones ficticias ni transmite automáticamente a Web3Forms. Reactivar el envío directo solo después de verificar su aceptación; una confirmación de proveedor no demuestra llegada a la bandeja de entrada.
 
-La recepción real de correo depende de la cuenta y configuración existentes de Web3Forms. Las pruebas locales no verifican la entrega en la bandeja de entrada. No modificar su clave pública sin revisar la configuración del proveedor.
+Las anclas `#inicio`, `#servicios`, `#ia`, `#metodologia`, `#nosotros`, `#preguntas` y `#contacto` siguen disponibles. `#ia` abre el servicio multimodal. Los enlaces anteriores `#diagnostico` y `#calculadora` llevan al contacto. No existen rutas adicionales que redirigir.
 
-## Publicación
+## Publicación existente
 
-Un push a `main` activa `.github/workflows/deploy.yml` y publica `dist/` en GitHub Pages. El flujo actual usa artefactos de Pages, no un push a `gh-pages`. `public/CNAME` conserva `www.forvi.cl`.
+**Solicitar aprobación de la versión revisada antes de cualquier despliegue público.** No cambiar DNS, correo, credenciales ni protecciones del repositorio.
 
-El rediseño se desarrolla en `codex/forvi-professional-redesign`. No se publica por ejecutar la compilación local.
+La publicación vigente usa el contenido estático de la rama `gh-pages`, con `CNAME` y `.nojekyll`. El workflow de `main` permanece como configuración técnica existente, pero su despliegue por artefactos está bloqueado por la regla del entorno `github-pages`, que permite solamente la rama `gh-pages`. No depender de un push a `main` para publicar.
 
-## Datos oficiales
+Tras aprobación:
 
-- Correo: [contacto@forvi.cl](mailto:contacto@forvi.cl)
+1. Ejecutar pruebas/build sobre la versión aprobada y revisar `dist/`.
+2. Actualizar referencias remotas y preparar una checkout separada basada en `origin/gh-pages`.
+3. Sincronizar el contenido de `dist/` con esa checkout, excluyendo su archivo `.git`; conservar `CNAME` con `www.forvi.cl` y añadir `.nojekyll`.
+4. Revisar diferencias, registrar el commit de origen y hacer commit de los artefactos.
+5. Publicar el commit en `gh-pages` usando el acceso Git existente y esperar éxito de Pages.
+6. Verificar redirección de `forvi.cl` a `www.forvi.cl`, HTTPS, HTML/assets publicados y una visita funcional. No declarar publicado antes de estas comprobaciones.
+
+## Contactos oficiales
+
+- [contacto@forvi.cl](mailto:contacto@forvi.cl)
 - WhatsApp: [+56 9 3577 9373](https://wa.me/56935779373)
-- Instagram: [@forvi.cl](https://www.instagram.com/forvi.cl/)
-- Facebook: [@forvi.cl](https://www.facebook.com/forvi.cl/)
-- Dirección y respaldo profesional: [Guillermo Peralta](https://www.linkedin.com/in/guillermo-peralta)
-- Ubicación: Santiago, Chile.
+- Instagram y Facebook: [@forvi.cl](https://www.instagram.com/forvi.cl/) / [@forvi.cl](https://www.facebook.com/forvi.cl/)
+- [Guillermo Peralta](https://www.linkedin.com/in/guillermo-peralta)
 
-Conservar las credenciales y activos oficiales. No agregar clientes, testimonios, métricas ni condiciones comerciales sin respaldo.
+No agregar clientes, testimonios, cifras de éxito, precios, plazos ni certificaciones sin respaldo. La propuesta es colaboración técnica transparente y debe respetar las reglas de la institución del cliente.

@@ -1,4 +1,5 @@
 import { FAQ_ITEMS } from '../data/siteData';
+import { IconRenderer } from './IconRenderer';
 
 export function FaqSection() {
   return (
@@ -9,18 +10,23 @@ export function FaqSection() {
     >
       <div className="section-shell grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
         <div>
-          <p className="eyebrow">ANTES DE EMPEZAR</p>
+          <p className="eyebrow">PREGUNTAS FRECUENTES</p>
           <h2
             id="faq-title"
             className="mt-5 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-4xl"
           >
-            Buenas preguntas.
+            Antes de empezar,
             <br />
-            <span className="text-slate-400">Respuestas claras.</span>
+            <span className="text-slate-400">conversemos las dudas.</span>
           </h2>
           <p className="mt-5 text-sm leading-7 text-slate-400">
-            Cada proyecto es distinto. Estas son algunas de las cosas que podemos definir juntos.
+            Desde los tipos de datos hasta la explicación de resultados. Estas respuestas te
+            ayudarán a preparar una primera consulta sobre tu investigación.
           </p>
+          <a href="#contacto" className="text-link mt-6">
+            Hablemos de tu proyecto
+            <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
+          </a>
         </div>
         <div className="border-t border-white/10">
           {FAQ_ITEMS.map(item => (
