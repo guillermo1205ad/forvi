@@ -34,7 +34,6 @@ export function validateContactInquiry(inquiry: ContactInquiry): ContactFieldErr
 
 export function prepareContactInquiry(
   inquiry: ContactInquiry,
-  recipient: string,
 ): ContactSubmissionPayload {
   const name = inquiry.nombre.trim();
   return {
@@ -45,23 +44,10 @@ export function prepareContactInquiry(
     message: inquiry.objetivo.trim(),
     data_type: CONTACT_DATA_OPTIONS.find(option => option.value === inquiry.tipoDatos)?.label ?? 'Por definir',
     desired_deadline: inquiry.plazo.trim() || 'Por definir',
-    recipient,
   };
 }
 
-export function createContactLinks(inquiry: ContactInquiry, email: string, phone: string) {
-  const payload = prepareContactInquiry(inquiry, email);
-  const summary = [
-    'Hola FORVI, me gustaría solicitar una cotización de análisis para mi proyecto.',
-    `Nombre: ${payload.name}`,
-    `Correo: ${payload.email}`,
-    `Objetivo del proyecto: ${payload.message}`,
-    `Tipo de datos: ${payload.data_type}`,
-    `Plazo deseado: ${payload.desired_deadline}`,
-  ].join('\n');
+export function createContactWhatsAppLink(phone: string) {
   const whatsappMessage = 'Hola FORVI, me gustaría cotizar el análisis de datos de mi proyecto de investigación.';
-  return {
-    mailUrl: `mailto:${email}?subject=${encodeURIComponent('Cotización de análisis — FORVI')}&body=${encodeURIComponent(summary)}`,
-    whatsappUrl: `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`,
-  };
+  return `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`;
 }

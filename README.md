@@ -28,7 +28,7 @@ El build comprueba TypeScript y genera `dist/`. Ejecutar pruebas y build antes d
 - `src/components/MethodologySection.tsx`: evaluación, acuerdo, análisis y entrega; una ronda de ajustes dentro del alcance.
 - `src/components/AboutSection.tsx`: enfoque profesional de Guillermo Peralta y credenciales secundarias.
 - `src/components/ContactSection.tsx`: nombre, correo, objetivo, tipo de datos y plazo deseado. Sin archivos adjuntos, datos sensibles ni campos comerciales innecesarios.
-- `src/lib/contactSubmission.ts`: integración existente con Web3Forms conservada como código técnico, sin activar en la interfaz. Solo acepta HTTP correcto con `success: true` para una futura reactivación verificada.
+- `src/lib/contactSubmission.ts`: envío directo desde el navegador a Web3Forms. Solo confirma el envío con HTTP correcto y `success: true`; no abre la aplicación de correo ni redirige al visitante.
 - `src/index.css`: identidad visual, responsive, foco visible y movimiento reducido.
 - `src/assets/og-investigacion.svg`: fuente editable de la nueva composición social; usa el símbolo original sin alterarlo. El PNG final se sirve desde `public/og-investigacion.png`.
 
@@ -41,10 +41,18 @@ Las pruebas unitarias usan respuestas simuladas y no envían consultas reales. R
 1. Build y pruebas automatizadas.
 2. Escritorio y móvil sin desbordamiento horizontal, menú y foco por teclado.
 3. Selectores de portada y servicios, controles del recorrido animado, preguntas frecuentes y navegación por anclas.
-4. Validación del formulario, preparación de correo, edición sin pérdida del texto y enlaces de contacto directo.
+4. Validación del formulario, espera durante el envío, bloqueo de duplicados, errores sin pérdida de texto, confirmación real y enlaces de contacto directo.
 5. Enlaces oficiales, metadatos, datos estructurados, imágenes y ausencia de mensajes comerciales anteriores.
 
-La comprobación real de esta versión no confirmó Web3Forms: el navegador mostró error y el diagnóstico del endpoint recibió una página HTML de verificación de Cloudflare. No se eludió la verificación ni se cambió la clave. Por ello, el formulario prepara un correo editable y permite abrir la aplicación de correo para enviarlo; WhatsApp permanece como canal directo. No muestra confirmaciones ficticias ni transmite automáticamente a Web3Forms. Reactivar el envío directo solo después de verificar su aceptación; una confirmación de proveedor no demuestra llegada a la bandeja de entrada.
+## Envío de consultas
+
+El formulario usa el servicio gratuito de Web3Forms para enviar a `contacto@forvi.cl`. El destinatario se configura y verifica en la cuenta de Web3Forms: escribir un campo `recipient` en el JSON no cambia el buzón de destino. La clave pública del formulario se usa en el frontend; no incorporar contraseñas de correo ni credenciales SMTP.
+
+La petición usa JSON desde el navegador, como requiere el proveedor, con el correo del visitante en `email` para poder responderle. El formulario no admite archivos adjuntos. Mientras envía, deshabilita los campos y evita envíos duplicados. Un tiempo de espera de 15 segundos cancela la petición; los errores conservan el texto y permiten reintentar. La confirmación incluye el resumen de la consulta y permite iniciar otra.
+
+**Verificado el 15 de octubre de 2026:** el titular autorizó activar el servicio gratuito y aceptó sus términos. Se verificó `contacto@forvi.cl` mediante el código recibido en ese buzón, se creó «FORVI — Consultas de investigación» para `https://www.forvi.cl/` y se sustituyó la clave provisional rechazada por la clave pública del formulario creado. El panel del proveedor muestra `contacto@forvi.cl` como único destinatario. Una prueba desde la vista previa del sitio, con datos ficticios, recibió confirmación y quedó registrada en el panel; se comprobó también el foco en la confirmación. El titular confirmó la recepción del correo de prueba y aprobó publicar esta versión. Pruebas unitarias: 18/18; build correcto; revisión de escritorio y móvil sin desbordamiento horizontal, validación y conservación de datos ante rechazo.
+
+Referencias del proveedor: [API](https://docs.web3forms.com/getting-started/api-reference), [diagnóstico](https://docs.web3forms.com/getting-started/troubleshooting) y [plan gratuito](https://web3forms.com/pricing) (250 consultas mensuales al configurar esta versión).
 
 Las anclas `#inicio`, `#servicios`, `#ia`, `#metodologia`, `#nosotros`, `#preguntas` y `#contacto` siguen disponibles. `#ia` abre el servicio multimodal. Los enlaces anteriores `#diagnostico` y `#calculadora` llevan al contacto. No existen rutas adicionales que redirigir.
 

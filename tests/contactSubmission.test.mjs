@@ -10,7 +10,6 @@ const payload = {
   data_type: 'Encuestas',
   desired_deadline: 'Por definir',
   message: 'Este mensaje nunca se envía a la red.',
-  recipient: 'recipient@example.invalid',
 };
 
 test('accepts an explicit provider confirmation and sends the contact details', async () => {
@@ -21,8 +20,10 @@ test('accepts an explicit provider confirmation and sends the contact details', 
   assert.equal(url, 'https://api.web3forms.com/submit');
   assert.equal(init.method, 'POST');
   assert.equal(init.headers['Content-Type'], 'application/json');
-  const { access_key, ...sentPayload } = JSON.parse(init.body);
+  const { access_key, botcheck, ...sentPayload } = JSON.parse(init.body);
   assert.ok(access_key);
+  assert.equal(botcheck, false);
+  assert.equal('recipient' in sentPayload, false);
   assert.deepEqual(sentPayload, payload);
 });
 

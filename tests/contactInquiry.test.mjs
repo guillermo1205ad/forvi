@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import {
   CONTACT_DATA_OPTIONS,
   INITIAL_CONTACT_INQUIRY,
-  createContactLinks,
+  createContactWhatsAppLink,
   prepareContactInquiry,
   validateContactInquiry,
 } from '../src/lib/contactInquiry.ts';
@@ -24,13 +24,13 @@ test('requires the visitor name, a valid email and the project objective', () =>
 
 test('accepts an inquiry without committing to a data type or deadline', () => {
   assert.deepEqual(validateContactInquiry(inquiry), {});
-  const payload = prepareContactInquiry(inquiry, 'contact@example.invalid');
+  const payload = prepareContactInquiry(inquiry);
   assert.equal(payload.name, 'Consulta de prueba');
   assert.equal(payload.email, 'test@example.invalid');
   assert.equal(payload.message, 'Comparar respuestas de una encuesta.');
   assert.equal(payload.data_type, 'Por definir');
   assert.equal(payload.desired_deadline, 'Por definir');
-  assert.equal(payload.recipient, 'contact@example.invalid');
+  assert.equal('recipient' in payload, false);
   assert.equal('_gotcha' in payload, false);
 });
 
@@ -40,26 +40,20 @@ test('includes each supported data type and the requested deadline in the submis
       ...inquiry,
       tipoDatos: option.value,
       plazo: '  Fecha por acordar con mi equipo  ',
-    }, 'contact@example.invalid');
+    });
     assert.equal(payload.data_type, option.label);
     assert.equal(payload.desired_deadline, 'Fecha por acordar con mi equipo');
   }
 });
 
-test('email fallback preserves the objective and special characters for review before sending', () => {
+test('preserves the objective and special characters in the direct submission', () => {
   const form = { ...inquiry, objetivo: 'Texto & audio: ¿qué cambia?\nAnálisis + interpretación.' };
-  const { mailUrl } = createContactLinks(form, 'contact@example.invalid', '56935779373');
-  const parsed = new URL(mailUrl);
-  assert.equal(parsed.protocol, 'mailto:');
-  assert.equal(parsed.pathname, 'contact@example.invalid');
-  assert.equal(parsed.searchParams.get('subject'), 'Cotización de análisis — FORVI');
-  assert.ok(parsed.searchParams.get('body').includes(form.objetivo));
-  assert.ok(parsed.searchParams.get('body').includes('Tipo de datos: Por definir'));
-  assert.ok(parsed.searchParams.get('body').includes('Plazo deseado: Por definir'));
+  const payload = prepareContactInquiry(form);
+  assert.equal(payload.message, form.objetivo);
 });
 
 test('WhatsApp starts with a brief quotation request without copying the freeform inquiry', () => {
-  const { whatsappUrl } = createContactLinks(inquiry, 'contact@example.invalid', '56935779373');
+  const whatsappUrl = createContactWhatsAppLink('56935779373');
   const parsed = new URL(whatsappUrl);
   const message = parsed.searchParams.get('text');
   assert.equal(parsed.origin, 'https://wa.me');

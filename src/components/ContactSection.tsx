@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Mail,
@@ -7,10 +8,11 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { SITE_INFO } from '../data/siteData';
+import { submitContact } from '../lib/contactSubmission';
 import {
   CONTACT_DATA_OPTIONS,
   INITIAL_CONTACT_INQUIRY,
-  createContactLinks,
+  createContactWhatsAppLink,
   prepareContactInquiry,
   validateContactInquiry,
   type ContactFieldErrors,
@@ -21,14 +23,24 @@ const labelClass = 'mb-2 block text-sm font-medium text-slate-200';
 
 export function ContactSection() {
   const [formData, setFormData] = useState(INITIAL_CONTACT_INQUIRY);
-  const [isPrepared, setIsPrepared] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
+  const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
-  const reviewRef = useRef<HTMLHeadingElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const inFlight = useRef(false);
+  const requestRef = useRef<AbortController | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isPrepared) reviewRef.current?.focus();
-  }, [isPrepared]);
+    if (status === 'success') successRef.current?.focus();
+  }, [status]);
+
+  useEffect(() => () => {
+    requestRef.current?.abort();
+    requestRef.current = null;
+    if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -38,26 +50,54 @@ export function ContactSection() {
     }
   };
 
-  const { whatsappUrl, mailUrl } = createContactLinks(formData, SITE_INFO.email, SITE_INFO.phoneRaw);
-  const inquiry = prepareContactInquiry(formData, SITE_INFO.email);
+  const whatsappUrl = createContactWhatsAppLink(SITE_INFO.phoneRaw);
+  const inquiry = prepareContactInquiry(formData);
 
-  const handlePrepare = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (formData._gotcha) return;
+    if (inFlight.current || formData._gotcha) return;
 
     const errors = validateContactInquiry(formData);
     setFieldErrors(errors);
+    setErrorMessage('');
 
     const firstInvalidField = (['nombre', 'correo', 'objetivo'] as const).find(field => errors[field]);
     if (firstInvalidField) {
       formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalidField}"]`)?.focus();
       return;
     }
-    setIsPrepared(true);
+
+    inFlight.current = true;
+    setStatus('submitting');
+    const controller = new AbortController();
+    requestRef.current = controller;
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    timeoutRef.current = timeout;
+
+    try {
+      await submitContact(inquiry, { signal: controller.signal });
+      controller.signal.throwIfAborted();
+      if (requestRef.current === controller) setStatus('success');
+    } catch (error) {
+      if (import.meta.env.DEV) console.error('Contact submission failed', error);
+      if (requestRef.current !== controller) return;
+      setStatus('error');
+      setErrorMessage(controller.signal.aborted
+        ? 'El envío tardó demasiado y no pudimos confirmarlo. Conservamos tus datos para que puedas reintentar.'
+        : 'No pudimos confirmar el envío. Tus datos siguen en el formulario: puedes revisarlos y reintentar.');
+    } finally {
+      window.clearTimeout(timeout);
+      if (timeoutRef.current === timeout) timeoutRef.current = null;
+      if (requestRef.current === controller) requestRef.current = null;
+      inFlight.current = false;
+    }
   };
 
-  const editInquiry = () => {
-    setIsPrepared(false);
+  const resetForm = () => {
+    setFormData(INITIAL_CONTACT_INQUIRY);
+    setFieldErrors({});
+    setErrorMessage('');
+    setStatus('idle');
     window.requestAnimationFrame(() => {
       formRef.current?.querySelector<HTMLInputElement>('[name="nombre"]')?.focus();
     });
@@ -152,18 +192,19 @@ export function ContactSection() {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-[#071a32] p-6 sm:p-8">
-            {isPrepared ? (
+            {status === 'success' ? (
               <div>
                 <h3
-                  ref={reviewRef}
+                  ref={successRef}
                   tabIndex={-1}
                   className="text-2xl font-semibold text-white focus:outline-none"
                 >
-                  Revisa tu consulta
+                  Tu consulta fue enviada.
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                  Aún no se ha enviado ningún mensaje. Revisa el resumen y abre tu correo para
-                  enviarlo a <span className="break-all text-white">{SITE_INFO.email}</span>.
+                  Gracias, {inquiry.name}. Te responderemos a{' '}
+                  <span className="break-all text-white">{inquiry.email}</span>{' '}
+                  para conversar sobre tu análisis.
                 </p>
                 <dl className="mt-6 space-y-5 rounded-xl border border-white/10 bg-[#000A18]/50 p-5 text-sm">
                   <div>
@@ -190,18 +231,10 @@ export function ContactSection() {
                   </div>
                 </dl>
                 <div className="mt-6 flex flex-col gap-3">
-                  <a href={mailUrl} className="button-primary">
-                    <Mail aria-hidden="true" className="h-4 w-4" />
-                    Abrir mi correo para enviar
-                  </a>
-                  <button type="button" className="button-secondary" onClick={editInquiry}>
-                    Editar consulta
+                  <button type="button" className="button-secondary" onClick={resetForm}>
+                    Enviar otra consulta
                   </button>
                 </div>
-                <p className="mt-4 text-xs leading-relaxed text-slate-400">
-                  Se abrirá tu aplicación de correo. El mensaje se envía desde allí. Si no se abre,
-                  puedes copiar el resumen y escribir a {SITE_INFO.email} desde tu correo habitual.
-                </p>
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -209,15 +242,14 @@ export function ContactSection() {
                   className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text-[#59aeff] underline underline-offset-4"
                 >
                   <MessageSquare aria-hidden="true" className="h-4 w-4" />
-                  Prefiero conversar por WhatsApp
+                  Continuar por WhatsApp
                 </a>
               </div>
             ) : (
-              <form ref={formRef} onSubmit={handlePrepare} noValidate>
-                <h3 className="text-xl font-semibold text-white">Prepara tu consulta por correo</h3>
+              <form ref={formRef} onSubmit={handleSubmit} noValidate aria-busy={status === 'submitting'}>
+                <h3 className="text-xl font-semibold text-white">Envíanos tu consulta</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                  Completa estos datos para preparar un mensaje que podrás revisar y enviar desde
-                  tu aplicación de correo. No se envía automáticamente.
+                  Completa estos datos para enviar tu consulta directamente a FORVI desde esta página.
                 </p>
                 <p id="contact-form-note" className="mt-2 text-xs leading-relaxed text-slate-400">
                   Los campos con * son obligatorios. Si aún no conoces el tipo de datos o el plazo,
@@ -236,7 +268,23 @@ export function ContactSection() {
                   />
                 </div>
 
+                {errorMessage && (
+                  <div role="alert" className="mt-5 rounded-xl border border-red-400/30 bg-red-950/30 p-4">
+                    <p className="text-sm leading-relaxed text-red-200">{errorMessage}</p>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-white underline underline-offset-4"
+                    >
+                      <MessageSquare aria-hidden="true" className="h-4 w-4" />
+                      Conversar por WhatsApp
+                    </a>
+                  </div>
+                )}
+
                 <fieldset
+                  disabled={status === 'submitting'}
                   aria-describedby="contact-form-note"
                   className="mt-6 min-w-0 space-y-5"
                 >
@@ -351,12 +399,25 @@ export function ContactSection() {
                   </div>
                   <button
                     type="submit"
-                    className="button-primary w-full"
+                    disabled={status === 'submitting'}
+                    className="button-primary w-full disabled:cursor-wait disabled:opacity-60"
                   >
-                    Preparar consulta por correo
-                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                    {status === 'submitting' ? (
+                      <>
+                        <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                        Enviando consulta…
+                      </>
+                    ) : (
+                      <>
+                        {status === 'error' ? 'Reintentar envío' : 'Enviar consulta'}
+                        <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                      </>
+                    )}
                   </button>
                 </fieldset>
+                <p aria-live="polite" className="sr-only">
+                  {status === 'submitting' ? 'Enviando tu consulta. Espera la confirmación.' : ''}
+                </p>
                 <p className="mt-4 text-xs leading-relaxed text-slate-400">
                   Usaremos la información que nos envíes para responder tu consulta. También puedes
                   escribirnos directamente por WhatsApp.

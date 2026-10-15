@@ -6,7 +6,6 @@ export interface ContactSubmissionPayload {
   data_type: string;
   desired_deadline: string;
   message: string;
-  recipient: string;
 }
 
 interface SubmissionOptions {
@@ -27,10 +26,14 @@ export async function submitContact(
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
       ...payload,
-      access_key: 'b1424eb0-0588-46cb-8b5e-4bb59a860714',
+      // Public form key; its verified recipient is configured in Web3Forms.
+      access_key: '81898967-6c56-4b66-9173-be44a6c26802',
+      botcheck: false,
     }),
   });
 
+  // The provider can return an HTML challenge instead of its JSON API response.
+  // Neither a successful HTTP status nor a redirect alone confirms delivery.
   if (!response.ok) throw new Error(`Submission rejected (HTTP ${response.status})`);
   const result: unknown = await response.json();
   if (typeof result !== 'object' || result === null || !('success' in result) || result.success !== true) {
