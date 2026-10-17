@@ -29,6 +29,48 @@
   font-weight: 400;
 }
 
+.research-motion-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.research-motion-steps {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #728aa5;
+}
+
+.research-motion-steps .step-dot {
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: #ffffff06;
+  border: 1px solid #ffffff12;
+  transition: all 120ms steps(2);
+}
+
+.research-motion-steps .step-dot.active {
+  color: #00c2ff;
+  border-color: #00c2ff88;
+  background: #027af129;
+  box-shadow: 0 0 10px -2px #00c2ff77;
+  animation: stopmotion-dot-pop 200ms steps(3) both;
+}
+
+@keyframes stopmotion-dot-pop {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.research-motion-steps .step-sep {
+  color: #ffffff25;
+  font-size: 8px;
+}
+
 .research-motion-control {
   display: inline-flex;
   min-width: 94px;
@@ -43,18 +85,25 @@
   background: #ffffff03;
   color: #b9dfff;
   font-size: 10px;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition: background 150ms steps(2), border-color 150ms steps(2);
 }
 
 .research-motion-control:hover {
   border-color: #45b6ff70;
   background: #027af11a;
+  animation: stopmotion-btn-tick 180ms steps(2) forwards;
+}
+
+@keyframes stopmotion-btn-tick {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+  100% { transform: translateY(-1px); }
 }
 
 .research-flow .research-stage {
   position: relative;
   min-width: 0;
-  transition: border-color 240ms ease, box-shadow 240ms ease;
+  transition: border-color 180ms steps(2), box-shadow 180ms steps(2);
 }
 
 .research-stage-content {
@@ -75,6 +124,7 @@
   height: 42px;
   flex-shrink: 0;
   object-fit: contain;
+  transition: transform 180ms steps(2);
 }
 
 .research-phase-label {
@@ -90,11 +140,19 @@
   margin-bottom: 0;
 }
 
+/* Stop-motion stage activation with snap and brightness pop */
 .research-flow[data-static='false'][data-phase='0'] .research-stage-source,
 .research-flow[data-static='false'][data-phase='1'] .research-stage-method,
 .research-flow[data-static='false'][data-phase='2'] .research-stage-results {
   border-color: #44bbffb3;
   box-shadow: 0 0 0 1px #00c2ff0d, 0 0 23px -12px #00c2ff88;
+  animation: stopmotion-stage-snap 240ms steps(3) both;
+}
+
+@keyframes stopmotion-stage-snap {
+  0% { transform: scale(0.994); filter: brightness(0.96); }
+  50% { transform: scale(1.012); filter: brightness(1.22); }
+  100% { transform: scale(1); filter: brightness(1); }
 }
 
 .research-flow[data-static='false'][data-phase='0'] .research-stage-source .research-phase-label,
@@ -103,6 +161,20 @@
   color: #85dfff;
 }
 
+/* Stop-motion faceted pulse for FORVI logo in Method stage */
+.research-flow[data-static='false'][data-playback='playing'][data-phase='1'] .flow-engine > img {
+  animation: stopmotion-logo-facet 1.4s steps(4) infinite;
+}
+
+@keyframes stopmotion-logo-facet {
+  0% { transform: translateY(0) rotate(0deg) scale(1); filter: drop-shadow(0 0 0px transparent); }
+  25% { transform: translateY(-2px) rotate(-1.5deg) scale(1.05); filter: drop-shadow(0 0 8px #00c2ff99); }
+  50% { transform: translateY(0px) rotate(1deg) scale(1.02); filter: drop-shadow(0 0 12px #00c2ffcc); }
+  75% { transform: translateY(-1px) rotate(-0.5deg) scale(1.04); filter: drop-shadow(0 0 6px #00c2ff77); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); filter: drop-shadow(0 0 0px transparent); }
+}
+
+/* Stepped connector particle travel (stop-motion cadenced pulse) */
 .research-flow .research-connector {
   position: relative;
   overflow: hidden;
@@ -120,7 +192,7 @@
   box-shadow: 0 0 8px 1px #00c2ff99;
   opacity: 0;
   animation-duration: var(--research-motion-duration);
-  animation-timing-function: linear;
+  animation-timing-function: steps(6, end);
   animation-iteration-count: 1;
   animation-fill-mode: both;
   animation-play-state: paused;
@@ -150,6 +222,28 @@
   56% { opacity: 1; transform: translateY(0); }
   65% { opacity: 1; transform: translateY(21px); }
   66%, 100% { opacity: 0; transform: translateY(21px); }
+}
+
+/* Stop-motion stamp-in effect for results in stage 3 */
+.research-flow[data-static='false'][data-phase='2'] .flow-output > div:nth-of-type(1) {
+  animation: stopmotion-result-stamp 220ms steps(2) both;
+  animation-delay: 60ms;
+}
+
+.research-flow[data-static='false'][data-phase='2'] .flow-output > div:nth-of-type(2) {
+  animation: stopmotion-result-stamp 220ms steps(2) both;
+  animation-delay: 200ms;
+}
+
+.research-flow[data-static='false'][data-phase='2'] .flow-output > div:nth-of-type(3) {
+  animation: stopmotion-result-stamp 220ms steps(2) both;
+  animation-delay: 340ms;
+}
+
+@keyframes stopmotion-result-stamp {
+  0% { opacity: 0; transform: translateX(-8px); }
+  50% { opacity: 0.8; transform: translateX(2px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 @media (max-width: 389px) {
@@ -189,12 +283,19 @@
 
 @media (prefers-reduced-motion: reduce) {
   .research-flow .research-stage,
-  .research-motion-control {
+  .research-motion-control,
+  .research-motion-steps .step-dot,
+  .research-flow .flow-engine > img {
     transition: none;
+    animation: none !important;
   }
 
   .research-flow .research-connector::after {
     display: none;
     animation: none;
+  }
+
+  .research-flow .flow-output > div {
+    animation: none !important;
   }
 }

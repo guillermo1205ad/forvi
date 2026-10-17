@@ -110,20 +110,32 @@ export function ResearchFlowMotion({ example }: { example: ResearchExample }) {
         <p className="research-motion-caption">
           Recorrido ilustrativo
           <span>
-            {reducedMotion ? 'Vista estática · movimiento reducido' : 'Fuentes, métodos y resultados'}
+            {reducedMotion
+              ? 'Vista estática · movimiento reducido'
+              : `Paso 0${phase + 1}/03 · ${phase === 0 ? 'Fuentes' : phase === 1 ? 'Métodos' : 'Resultados'}`
+            }
           </span>
         </p>
         {!reducedMotion && (
-          <button
-            type="button"
-            className="research-motion-control"
-            onClick={handlePlayback}
-            aria-label={`${buttonLabel} el recorrido ilustrativo`}
-            aria-controls="research-flow-diagram"
-          >
-            <PlaybackIcon aria-hidden="true" size={13} />
-            {buttonLabel}
-          </button>
+          <div className="research-motion-actions">
+            <div className="research-motion-steps" aria-hidden="true">
+              <span className={`step-dot ${phase === 0 ? 'active' : ''}`}>01</span>
+              <span className="step-sep">→</span>
+              <span className={`step-dot ${phase === 1 ? 'active' : ''}`}>02</span>
+              <span className="step-sep">→</span>
+              <span className={`step-dot ${phase === 2 ? 'active' : ''}`}>03</span>
+            </div>
+            <button
+              type="button"
+              className="research-motion-control"
+              onClick={handlePlayback}
+              aria-label={`${buttonLabel} el recorrido ilustrativo`}
+              aria-controls="research-flow-diagram"
+            >
+              <PlaybackIcon aria-hidden="true" size={13} />
+              {buttonLabel}
+            </button>
+          </div>
         )}
       </div>
 
