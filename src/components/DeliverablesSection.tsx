@@ -31,7 +31,7 @@ const ANALYSIS_DELIVERABLES = [
 
 const PREVIEW_TABS = [
   { id: 'tabla', shortLabel: 'Tabla ANOVA', label: 'Tabla ANOVA (APA 7)', icon: 'ChartColumn' },
-  { id: 'grafico', shortLabel: 'Gráfico', label: 'Gráfico analítico', icon: 'BarChart3' },
+  { id: 'grafico', shortLabel: 'Boxplot', label: 'Boxplot analítico', icon: 'BarChart3' },
   { id: 'informe', shortLabel: 'Informe', label: 'Informe técnico', icon: 'FileSearch' },
 ] as const;
 
@@ -246,47 +246,131 @@ export function DeliverablesSection() {
                 </div>
               )}
 
-              {/* Tab 2: Gráfico analítico */}
+              {/* Tab 2: Gráfico Boxplot analítico */}
               {activePreview === 'grafico' && (
                 <div className="solution-detail-body rounded-xl border border-white/10 bg-[#000a18]/60 p-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-[11px] mb-3">
-                    <span className="font-medium text-slate-200">Figura 1. Medias e Intervalos de Confianza (IC 95%) por grupo</span>
-                    <span className="text-[10px] text-forvi-cyan-300 font-mono self-start sm:self-auto">ANOVA F(2, 137) = 31.45 (p &lt; .001)</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-[11px] mb-2.5">
+                    <span className="font-medium text-slate-200">
+                      Figura 1. Diagrama de caja y bigotes (Boxplot) por condición
+                    </span>
+                    <span className="text-[10px] text-forvi-cyan-300 font-mono self-start sm:self-auto">
+                      ANOVA F(2, 137) = 31.45 (p &lt; .001)
+                    </span>
                   </div>
-                  <div className="space-y-3 font-mono text-[10px]">
-                    <div>
-                      <div className="flex justify-between text-slate-400 mb-1">
-                        <span className="text-white font-sans font-medium">Metodología Activa (n=47)</span>
-                        <span className="text-forvi-cyan-300 font-semibold">4.52 [IC 95%: 4.31, 4.73] <span className="text-slate-400 font-sans font-normal text-[9px]">(a)</span></span>
-                      </div>
-                      <div className="relative h-4 rounded bg-white/5 flex items-center px-1">
-                        <div className="h-2 rounded bg-forvi-cyan-400" style={{ width: '88%' }} />
-                        <div className="absolute right-[12%] h-3 w-0.5 bg-white" />
-                      </div>
+
+                  {/* SVG Boxplot */}
+                  <div className="rounded-lg bg-[#000a18]/80 p-2 border border-white/5">
+                    <svg
+                      viewBox="0 0 440 210"
+                      className="w-full h-auto"
+                      role="img"
+                      aria-label="Diagrama de cajas y bigotes comparando Grupo Control, Tradicional y Activo"
+                    >
+                      {/* Gridlines & Y-Axis */}
+                      <g opacity="0.6">
+                        <line x1="45" y1="30" x2="420" y2="30" stroke="#334155" strokeDasharray="3 3" />
+                        <text x="35" y="33" textAnchor="end" fill="#94a3b8" className="font-mono text-[9px]">5.0</text>
+                        <line x1="45" y1="65" x2="420" y2="65" stroke="#334155" strokeDasharray="3 3" />
+                        <text x="35" y="68" textAnchor="end" fill="#94a3b8" className="font-mono text-[9px]">4.0</text>
+                        <line x1="45" y1="100" x2="420" y2="100" stroke="#334155" strokeDasharray="3 3" />
+                        <text x="35" y="103" textAnchor="end" fill="#94a3b8" className="font-mono text-[9px]">3.0</text>
+                        <line x1="45" y1="135" x2="420" y2="135" stroke="#334155" strokeDasharray="3 3" />
+                        <text x="35" y="138" textAnchor="end" fill="#94a3b8" className="font-mono text-[9px]">2.0</text>
+                        <line x1="45" y1="170" x2="420" y2="170" stroke="#334155" strokeDasharray="3 3" />
+                        <text x="35" y="173" textAnchor="end" fill="#94a3b8" className="font-mono text-[9px]">1.0</text>
+                      </g>
+
+                      {/* Boxplot 1: Control (c) */}
+                      <g>
+                        {/* Whiskers */}
+                        <line x1="105" y1="61.5" x2="135" y2="61.5" stroke="#94a3b8" strokeWidth="1.5" />
+                        <line x1="120" y1="61.5" x2="120" y2="80.75" stroke="#94a3b8" strokeWidth="1.5" />
+                        <line x1="120" y1="110.5" x2="120" y2="135" stroke="#94a3b8" strokeWidth="1.5" />
+                        <line x1="105" y1="135" x2="135" y2="135" stroke="#94a3b8" strokeWidth="1.5" />
+                        {/* Box (Q1 - Q3) */}
+                        <rect x="95" y="80.75" width="50" height="29.75" rx="3" fill="#1e293b" stroke="#64748b" strokeWidth="1.5" />
+                        {/* Median line (Q2) */}
+                        <line x1="95" y1="96.5" x2="145" y2="96.5" stroke="#cbd5e1" strokeWidth="2.5" />
+                        {/* Mean mark (diamond) */}
+                        <polygon points="120,92.5 123.5,96 120,99.5 116.5,96" fill="#f8fafc" />
+                        {/* Tukey Letter */}
+                        <text x="120" y="52" textAnchor="middle" fill="#94a3b8" className="font-mono text-[10px] font-bold">c</text>
+                        {/* Labels */}
+                        <text x="120" y="188" textAnchor="middle" fill="#cbd5e1" className="font-sans text-[10px] font-medium">Control</text>
+                        <text x="120" y="199" textAnchor="middle" fill="#64748b" className="font-mono text-[8.5px]">n=45</text>
+                      </g>
+
+                      {/* Boxplot 2: Tradicional (b) */}
+                      <g>
+                        {/* Whiskers */}
+                        <line x1="215" y1="40.5" x2="245" y2="40.5" stroke="#60a5fa" strokeWidth="1.5" />
+                        <line x1="230" y1="40.5" x2="230" y2="56.25" stroke="#60a5fa" strokeWidth="1.5" />
+                        <line x1="230" y1="84.25" x2="230" y2="114" stroke="#60a5fa" strokeWidth="1.5" />
+                        <line x1="215" y1="114" x2="245" y2="114" stroke="#60a5fa" strokeWidth="1.5" />
+                        {/* Box (Q1 - Q3) */}
+                        <rect x="205" y="56.25" width="50" height="28" rx="3" fill="#0f3460" stroke="#3b82f6" strokeWidth="1.5" />
+                        {/* Median line (Q2) */}
+                        <line x1="205" y1="72" x2="255" y2="72" stroke="#93c5fd" strokeWidth="2.5" />
+                        {/* Mean mark (diamond) */}
+                        <polygon points="230,67 233.5,70.5 230,74 226.5,70.5" fill="#ffffff" />
+                        {/* Tukey Letter */}
+                        <text x="230" y="32" textAnchor="middle" fill="#93c5fd" className="font-mono text-[10px] font-bold">b</text>
+                        {/* Labels */}
+                        <text x="230" y="188" textAnchor="middle" fill="#cbd5e1" className="font-sans text-[10px] font-medium">Tradicional</text>
+                        <text x="230" y="199" textAnchor="middle" fill="#64748b" className="font-mono text-[8.5px]">n=48</text>
+                      </g>
+
+                      {/* Boxplot 3: Activo (a) */}
+                      <g>
+                        {/* Whiskers */}
+                        <line x1="325" y1="30" x2="355" y2="30" stroke="#00c2ff" strokeWidth="1.5" />
+                        <line x1="340" y1="30" x2="340" y2="35.25" stroke="#00c2ff" strokeWidth="1.5" />
+                        <line x1="340" y1="58" x2="340" y2="86" stroke="#00c2ff" strokeWidth="1.5" />
+                        <line x1="325" y1="86" x2="355" y2="86" stroke="#00c2ff" strokeWidth="1.5" />
+                        {/* Box (Q1 - Q3) */}
+                        <rect x="315" y="35.25" width="50" height="22.75" rx="3" fill="#034675" stroke="#00c2ff" strokeWidth="1.5" />
+                        {/* Median line (Q2) */}
+                        <line x1="315" y1="44" x2="365" y2="44" stroke="#ffffff" strokeWidth="2.5" />
+                        {/* Mean mark (diamond) */}
+                        <polygon points="340,43.5 343.5,47 340,50.5 336.5,47" fill="#facc15" />
+                        {/* Tukey Letter */}
+                        <text x="340" y="20" textAnchor="middle" fill="#00c2ff" className="font-mono text-[11px] font-bold">a*</text>
+                        {/* Labels */}
+                        <text x="340" y="188" textAnchor="middle" fill="#00c2ff" className="font-sans text-[10px] font-semibold">Activo</text>
+                        <text x="340" y="199" textAnchor="middle" fill="#38bdf8" className="font-mono text-[8.5px]">n=47</text>
+                      </g>
+
+                      {/* Legend */}
+                      <g className="font-sans text-[8px]" fill="#94a3b8">
+                        <line x1="375" y1="95" x2="385" y2="95" stroke="#ffffff" strokeWidth="2" />
+                        <text x="390" y="98">Mediana</text>
+                        <polygon points="380,108 383,111 380,114 377,111" fill="#facc15" />
+                        <text x="390" y="113">Media (◆)</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  {/* Summary Metric Strip */}
+                  <div className="mt-3 grid grid-cols-3 gap-2 border-t border-white/10 pt-2.5 text-center font-mono text-[9px]">
+                    <div className="rounded-lg bg-white/[.02] p-1.5 border border-white/5">
+                      <span className="text-slate-400 block font-sans text-[10px]">Control (c)</span>
+                      <span className="text-white font-semibold">Md: 3.10</span> · <span className="text-slate-300">M: 3.12</span>
+                      <span className="text-[8.5px] text-slate-400 block mt-0.5">IQR: 2.70 - 3.55</span>
                     </div>
-                    <div>
-                      <div className="flex justify-between text-slate-400 mb-1">
-                        <span className="text-slate-300 font-sans">Metodología Tradicional (n=48)</span>
-                        <span className="text-slate-200">3.85 [IC 95%: 3.61, 4.09] <span className="text-slate-400 font-sans font-normal text-[9px]">(b)</span></span>
-                      </div>
-                      <div className="relative h-4 rounded bg-white/5 flex items-center px-1">
-                        <div className="h-2 rounded bg-forvi-blue-500/80" style={{ width: '68%' }} />
-                        <div className="absolute right-[32%] h-3 w-0.5 bg-slate-400" />
-                      </div>
+                    <div className="rounded-lg bg-white/[.02] p-1.5 border border-white/5">
+                      <span className="text-slate-300 block font-sans text-[10px]">Tradicional (b)</span>
+                      <span className="text-white font-semibold">Md: 3.80</span> · <span className="text-slate-300">M: 3.85</span>
+                      <span className="text-[8.5px] text-slate-400 block mt-0.5">IQR: 3.45 - 4.25</span>
                     </div>
-                    <div>
-                      <div className="flex justify-between text-slate-400 mb-1">
-                        <span className="text-slate-400 font-sans">Grupo Control (n=45)</span>
-                        <span className="text-slate-400">3.12 [IC 95%: 2.88, 3.36] <span className="text-slate-400 font-sans font-normal text-[9px]">(c)</span></span>
-                      </div>
-                      <div className="relative h-4 rounded bg-white/5 flex items-center px-1">
-                        <div className="h-2 rounded bg-white/20" style={{ width: '48%' }} />
-                        <div className="absolute right-[52%] h-3 w-0.5 bg-slate-500" />
-                      </div>
+                    <div className="rounded-lg bg-forvi-blue-950/40 p-1.5 border border-forvi-blue-400/30">
+                      <span className="text-forvi-cyan-300 block font-sans text-[10px] font-semibold">Activo (a) ★</span>
+                      <span className="text-white font-semibold">Md: 4.60</span> · <span className="text-forvi-cyan-300 font-semibold">M: 4.52</span>
+                      <span className="text-[8.5px] text-forvi-cyan-400/80 block mt-0.5">IQR: 4.20 - 4.85</span>
                     </div>
                   </div>
+
                   <p className="mt-3 text-[9px] text-slate-400 border-t border-white/10 pt-1.5">
-                    Gráficos generados en R (ggplot2) o Python (matplotlib/seaborn) a 300 DPI con letras de significancia Post-Hoc (Tukey HSD: a, b, c) listos para integrar en tu tesis o paper.
+                    Diagrama de caja y bigotes (Boxplot) con distribución empírica, rango intercuartílico (IQR), mediana, media y letras de contrastes múltiples Tukey HSD a 300 DPI (formato vectorial SVG/PDF).
                   </p>
                 </div>
               )}
