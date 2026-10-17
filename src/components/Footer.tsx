@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import { SITE_INFO } from '../data/siteData';
 import { IconRenderer } from './IconRenderer';
 
 export function Footer() {
+  const [copied, setCopied] = useState(false);
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(SITE_INFO.email);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
   return (
     <footer className="border-t border-white/10 bg-[#000713] pb-8 pt-14 text-slate-400">
       <div className="section-shell">
@@ -67,12 +74,23 @@ export function Footer() {
           </nav>
           <div>
             <h2 className="mb-5 text-xs font-semibold text-white">El próximo paso empieza contigo.</h2>
-            <a
-              href={`mailto:${SITE_INFO.email}`}
-              className="inline-block py-1 text-lg font-medium text-white hover:text-forvi-cyan-300"
-            >
-              {SITE_INFO.email}
-            </a>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={`mailto:${SITE_INFO.email}`}
+                className="inline-block py-1 text-lg font-medium text-white hover:text-forvi-cyan-300"
+              >
+                {SITE_INFO.email}
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label="Copiar correo de FORVI al portapapeles"
+                className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-slate-300 transition-colors hover:border-forvi-blue-400 hover:text-white"
+              >
+                <IconRenderer name={copied ? 'Check' : 'Copy'} className="h-3 w-3 text-forvi-cyan-300" />
+                <span>{copied ? 'Copiado' : 'Copiar'}</span>
+              </button>
+            </div>
             <a
               href={SITE_INFO.whatsappUrl}
               target="_blank"

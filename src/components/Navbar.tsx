@@ -12,8 +12,22 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('inicio');
+  const [scrollProgress, setScrollProgress] = useState(0);
   const toggle = useRef<HTMLButtonElement>(null);
   const header = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const progress = Math.min(100, Math.max(0, (window.scrollY / totalScroll) * 100));
+        setScrollProgress(progress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -148,6 +162,12 @@ export function Navbar() {
           </a>
         </div>
       </nav>
+      <div className="scroll-progress-track" aria-hidden="true">
+        <div
+          className="scroll-progress-indicator"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
     </header>
   );
 }

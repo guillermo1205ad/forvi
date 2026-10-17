@@ -6,6 +6,9 @@ import {
   Instagram,
   Facebook,
   ArrowRight,
+  Copy,
+  Check,
+  Sparkles,
 } from 'lucide-react';
 import { SITE_INFO } from '../data/siteData';
 import { submitContact } from '../lib/contactSubmission';
@@ -18,6 +21,26 @@ import {
   type ContactFieldErrors,
 } from '../lib/contactInquiry';
 
+const SCOPE_OPTIONS = [
+  { id: 'posgrado', label: 'Tesis de posgrado (Mg./Dr.)' },
+  { id: 'pregrado', label: 'Tesis de pregrado' },
+  { id: 'paper', label: 'Paper / Investigación académica' },
+  { id: 'empresa', label: 'Consultoría empresarial' },
+];
+
+const DATA_OPTIONS = [
+  { id: 'base', label: 'Base de datos (Excel/CSV/SPSS)', formValue: 'bases-de-datos', text: 'cuento con una base de datos cuantitativa' },
+  { id: 'texto', label: 'Entrevistas / Documentos (Texto)', formValue: 'documentos-texto', text: 'cuento con transcripciones y documentos para análisis' },
+  { id: 'mixto', label: 'Varias fuentes combinadas', formValue: 'varias-fuentes', text: 'cuento con fuentes combinadas (cuantitativas y cualitativas)' },
+  { id: 'pendiente', label: 'Aún sin recolectar', formValue: 'por-definir', text: 'estoy en etapa preliminar y aún no recolecto los datos' },
+];
+
+const TIMELINE_OPTIONS = [
+  { id: 'urgente', label: 'Urgente (< 15 días)', value: 'Urgente (< 15 días)' },
+  { id: 'semanas', label: 'Próximas semanas (1 mes)', value: 'Próximas semanas' },
+  { id: 'flexible', label: 'Plazo flexible', value: 'Plazo flexible' },
+];
+
 const fieldClass = 'w-full rounded-xl border border-white/15 bg-[#000A18] px-4 py-3 text-sm text-white placeholder:text-slate-500 transition-colors focus:border-[#027AF1] focus:outline-none focus:ring-2 focus:ring-[#027AF1]/30 disabled:opacity-60';
 const labelClass = 'mb-2 block text-sm font-medium text-slate-200';
 
@@ -26,6 +49,11 @@ export function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [orientScope, setOrientScope] = useState<string | null>(null);
+  const [orientData, setOrientData] = useState<string | null>(null);
+  const [orientTimeline, setOrientTimeline] = useState<string | null>(null);
+  const [appliedOrient, setAppliedOrient] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const inFlight = useRef(false);
@@ -52,6 +80,49 @@ export function ContactSection() {
 
   const whatsappUrl = createContactWhatsAppLink(SITE_INFO.phoneRaw);
   const inquiry = prepareContactInquiry(formData);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(SITE_INFO.email);
+    setCopiedEmail(true);
+    window.setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleApplyOrientation = () => {
+    const scopeObj = SCOPE_OPTIONS.find(s => s.id === orientScope);
+    const dataObj = DATA_OPTIONS.find(d => d.id === orientData);
+    const timelineObj = TIMELINE_OPTIONS.find(t => t.id === orientTimeline);
+
+    const scopeText = scopeObj?.label || 'mi investigación';
+    const dataText = dataObj?.text || 'datos por revisar';
+    const timelineText = timelineObj?.value || 'Plazo por acordar';
+
+    const generatedObjective = `Hola FORVI, estoy desarrollando mi ${scopeText.toLowerCase()}. En este momento ${dataText}. Mi plazo estimado es: ${timelineText.toLowerCase()}. Quisiera cotizar el análisis pertinente y la interpretación de los resultados.`;
+
+    setFormData(previous => ({
+      ...previous,
+      objetivo: generatedObjective,
+      tipoDatos: dataObj?.formValue || 'por-definir',
+      plazo: timelineText,
+    }));
+
+    setFieldErrors(previous => ({
+      ...previous,
+      objetivo: undefined,
+    }));
+
+    setAppliedOrient(true);
+    window.setTimeout(() => setAppliedOrient(false), 3500);
+
+    formRef.current?.querySelector<HTMLElement>('[name="nombre"]')?.focus();
+  };
+
+  const orientWhatsAppText = `Hola FORVI, quisiera cotizar el análisis para mi ${
+    SCOPE_OPTIONS.find(s => s.id === orientScope)?.label.toLowerCase() || 'investigación'
+  }. En este momento ${
+    DATA_OPTIONS.find(d => d.id === orientData)?.text || 'cuento con datos por revisar'
+  }. Plazo estimado: ${TIMELINE_OPTIONS.find(t => t.id === orientTimeline)?.value || 'por definir'}.`;
+
+  const orientWhatsAppUrl = `https://wa.me/${SITE_INFO.phoneRaw}?text=${encodeURIComponent(orientWhatsAppText)}`;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -147,19 +218,38 @@ export function ContactSection() {
                   </span>
                   <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1" />
                 </a>
-                <a
-                  href={`mailto:${SITE_INFO.email}`}
-                  className="group flex min-h-20 items-center gap-4 rounded-xl border border-white/10 bg-[#000A18]/50 p-4 transition-colors hover:border-[#027AF1]/60"
-                >
-                  <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-[#59aeff]" />
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-xs text-slate-400">Correo electrónico</span>
-                    <span className="mt-1 block break-all text-sm font-semibold text-white">
-                      {SITE_INFO.email}
+                <div className="group flex min-h-20 items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#000A18]/50 p-4 transition-colors hover:border-[#027AF1]/60">
+                  <a
+                    href={`mailto:${SITE_INFO.email}`}
+                    className="flex min-w-0 flex-1 items-center gap-4"
+                  >
+                    <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-[#59aeff]" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs text-slate-400">Correo electrónico</span>
+                      <span className="mt-1 block break-all text-sm font-semibold text-white">
+                        {SITE_INFO.email}
+                      </span>
                     </span>
-                  </span>
-                  <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1" />
-                </a>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    aria-label="Copiar correo electrónico al portapapeles"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-xs text-slate-300 transition-colors hover:border-forvi-blue-400 hover:text-white"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check aria-hidden="true" className="h-3.5 w-3.5 text-forvi-cyan-300" />
+                        <span className="text-forvi-cyan-300 font-medium">¡Copiado!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy aria-hidden="true" className="h-3.5 w-3.5 text-slate-400" />
+                        <span>Copiar</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
                 <a
@@ -251,6 +341,116 @@ export function ContactSection() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">
                   Completa estos datos para enviar tu consulta directamente a FORVI desde esta página.
                 </p>
+
+                {/* 3-Click Project Orientation Helper */}
+                <div className="my-6 rounded-2xl border border-forvi-blue-400/25 bg-[#001026]/80 p-4 sm:p-5 shadow-inner">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-forvi-cyan-300 font-semibold">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      Orientador rápido en 3 clics
+                    </span>
+                    <span className="text-[10px] text-slate-400">Ayuda para formular</span>
+                  </div>
+                  <p className="text-xs text-slate-300 mb-3.5">
+                    ¿No tienes claro qué escribir? Selecciona tus 3 opciones y preparamos tu consulta al instante:
+                  </p>
+
+                  <div className="space-y-3 text-xs">
+                    <div>
+                      <span className="text-[11px] font-medium text-slate-400 block mb-1.5">1. Tipo de estudio:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {SCOPE_OPTIONS.map(opt => (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={() => setOrientScope(opt.id)}
+                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                              orientScope === opt.id
+                                ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
+                                : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <span className="text-[11px] font-medium text-slate-400 block mb-1.5">2. Estado de tus fuentes:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {DATA_OPTIONS.map(opt => (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={() => setOrientData(opt.id)}
+                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                              orientData === opt.id
+                                ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
+                                : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <span className="text-[11px] font-medium text-slate-400 block mb-1.5">3. Plazo estimado:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {TIMELINE_OPTIONS.map(opt => (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={() => setOrientTimeline(opt.id)}
+                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                              orientTimeline === opt.id
+                                ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
+                                : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {orientScope && orientData && (
+                    <div className="mt-4 pt-3.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                      <span className="text-[11px] text-forvi-cyan-300 flex items-center gap-1.5">
+                        <Check className="h-3.5 w-3.5" />
+                        Propuesta lista para autocompletar
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={handleApplyOrientation}
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-forvi-blue-600 hover:bg-forvi-blue-500 border border-forvi-cyan-400/50 px-3 py-1.5 text-xs font-semibold text-white transition-all shadow-md"
+                        >
+                          <span>Rellenar formulario ↓</span>
+                        </button>
+                        <a
+                          href={orientWhatsAppUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-[#00c2ff]/15 hover:bg-[#00c2ff]/25 border border-[#00c2ff]/40 px-3 py-1.5 text-xs font-semibold text-forvi-cyan-300 transition-all"
+                        >
+                          <MessageSquare className="h-3 w-3" />
+                          <span>WhatsApp directo ↗</span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
+                  {appliedOrient && (
+                    <p className="mt-2 text-[11px] text-emerald-300 animate-pulse font-medium">
+                      ✓ ¡Objetivo, tipo de datos y plazo aplicados al formulario! Completa tu nombre y correo para enviar.
+                    </p>
+                  )}
+                </div>
+
                 <p id="contact-form-note" className="mt-2 text-xs leading-relaxed text-slate-400">
                   Los campos con * son obligatorios. Si aún no conoces el tipo de datos o el plazo,
                   puedes dejarlo por definir.

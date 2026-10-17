@@ -18,11 +18,13 @@ import {
   Code2,
   Rocket,
   ArrowRight, ArrowUpRight, ArrowDown, ArrowUp, Check, Menu, X, Linkedin, Instagram, Facebook, MessageSquare,
+  Copy, CheckCheck,
   LucideIcon,
 } from 'lucide-react';
 
 const iconMap: Record<string, LucideIcon> = {
   ArrowRight, ArrowUpRight, ArrowDown, ArrowUp, Check, Menu, X, Linkedin, Instagram, Facebook, MessageSquare,
+  Copy, CheckCheck,
   ChartColumn,
   BarChart3,
   Globe,
