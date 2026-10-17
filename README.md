@@ -74,7 +74,7 @@ Tras aprobación:
 ## Contactos oficiales
 
 - [contacto@forvi.cl](mailto:contacto@forvi.cl)
-- WhatsApp: [+56 9 3577 9373](https://wa.me/56935779373)
+- WhatsApp: [+56 9 4948 4118](https://wa.me/56949484118)
 - Instagram y Facebook: [@forvi.cl](https://www.instagram.com/forvi.cl/) / [@forvi.cl](https://www.facebook.com/forvi.cl/)
 - [Guillermo Peralta](https://www.linkedin.com/in/guillermo-peralta)
 

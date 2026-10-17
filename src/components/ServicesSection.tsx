@@ -129,37 +129,39 @@ export function ServicesSection() {
             aria-live="polite"
             aria-atomic="true"
           >
-            <div className="mb-8 flex items-center justify-between">
-              <span className="solution-icon">
-                <IconRenderer name={service.icon} className="h-7 w-7" />
-              </span>
-              <span className="font-mono text-xs text-slate-400">ANÁLISIS / 0{selected + 1}</span>
-            </div>
-            <p className="mb-3 text-sm text-forvi-cyan-300">{service.question}</p>
-            <h3 className="max-w-lg text-2xl font-semibold leading-snug tracking-tight sm:text-[28px]">
-              {service.headline}
-            </h3>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
-              {service.description}
-            </p>
-            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-              {service.capabilities.map(capability => (
-                <li
-                  key={capability}
-                  className="flex items-start gap-2 text-xs leading-6 text-slate-300"
-                >
-                  <IconRenderer name="Check" className="mt-1 h-4 w-4 shrink-0 text-forvi-cyan-400" />
-                  {capability}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs leading-6 text-slate-400">{service.note}</p>
-            <div className="mt-6 border-t border-white/10 pt-6">
-              <a href={url} target="_blank" rel="noopener noreferrer" className="text-link">
-                Cotiza este análisis por WhatsApp
-                <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
-                <span className="sr-only"> (abre en una nueva pestaña)</span>
-              </a>
+            <div key={service.id} className="solution-detail-body">
+              <div className="mb-8 flex items-center justify-between">
+                <span className="solution-icon">
+                  <IconRenderer name={service.icon} className="h-7 w-7" />
+                </span>
+                <span className="font-mono text-xs text-slate-400">ANÁLISIS / 0{selected + 1}</span>
+              </div>
+              <p className="mb-3 text-sm text-forvi-cyan-300">{service.question}</p>
+              <h3 className="max-w-lg text-2xl font-semibold leading-snug tracking-tight sm:text-[28px]">
+                {service.headline}
+              </h3>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+                {service.description}
+              </p>
+              <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                {service.capabilities.map(capability => (
+                  <li
+                    key={capability}
+                    className="capability-item flex items-start gap-2 text-xs leading-6 text-slate-300"
+                  >
+                    <IconRenderer name="Check" className="mt-1 h-4 w-4 shrink-0 text-forvi-cyan-400" />
+                    {capability}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-xs leading-6 text-slate-400">{service.note}</p>
+              <div className="mt-6 border-t border-white/10 pt-6">
+                <a href={url} target="_blank" rel="noopener noreferrer" className="text-link">
+                  Cotiza este análisis por WhatsApp
+                  <IconRenderer name="ArrowUpRight" className="h-4 w-4" />
+                  <span className="sr-only"> (abre en una nueva pestaña)</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

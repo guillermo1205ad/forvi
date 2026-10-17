@@ -75,15 +75,15 @@ export function DeliverablesSection() {
 
           <ul className="divide-y divide-white/10 border-y border-white/10">
             {ANALYSIS_DELIVERABLES.map((item, index) => (
-              <li key={item.title} className="flex items-start gap-4 py-5 sm:gap-5">
-                <span className="mt-1 font-mono text-[11px] text-forvi-cyan-300" aria-hidden="true">
+              <li key={item.title} className="deliverable-item flex items-start gap-4 py-5 sm:gap-5">
+                <span className="deliverable-num mt-1 font-mono text-[11px] text-forvi-cyan-300" aria-hidden="true">
                   0{index + 1}
                 </span>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-white">{item.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-400">{item.description}</p>
                 </div>
-                <IconRenderer name={item.icon} className="mt-1 h-5 w-5 shrink-0 text-slate-400" />
+                <IconRenderer name={item.icon} className="deliverable-icon mt-1 h-5 w-5 shrink-0 text-slate-400" />
               </li>
             ))}
           </ul>

@@ -15,7 +15,7 @@ export function Hero() {
         <div className="hero-layout">
           <div className="hero-copy">
             <p className="eyebrow mb-7">
-              <span className="h-1.5 w-1.5 rounded-full bg-forvi-cyan-400" />{' '}
+              <span className="live-status-dot mr-1.5" aria-hidden="true" />
               ANÁLISIS DE DATOS · INVESTIGACIÓN
             </p>
             <h1 id="hero-title">

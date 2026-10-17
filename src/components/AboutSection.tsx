@@ -65,7 +65,8 @@ export function AboutSection() {
                 <span className="font-mono text-[10px] text-forvi-cyan-400">SpA</span>
               </div>
             </div>
-            <span className="rounded-full border border-forvi-blue-400/30 bg-forvi-blue-950/70 px-3 py-1 text-[11px] font-medium text-forvi-cyan-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-forvi-blue-400/30 bg-forvi-blue-950/70 px-3 py-1 text-[11px] font-medium text-forvi-cyan-300">
+              <span className="live-status-dot mr-0.5" aria-hidden="true" />
               Consultoría técnica
             </span>
           </div>
@@ -87,7 +88,7 @@ export function AboutSection() {
             {ABOUT_FORVI.commitments.map(commitment => (
               <li
                 key={commitment}
-                className="flex items-start gap-3 text-xs leading-6 text-slate-300"
+                className="commitment-item flex items-start gap-3 text-xs leading-6 text-slate-300"
               >
                 <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-forvi-blue-400" />
                 {commitment}

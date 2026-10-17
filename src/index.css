@@ -38,7 +38,14 @@
 .hero-glow { position: absolute; width: 800px; height: 800px; right: -280px; top: -100px; background: radial-gradient(circle, #027af11c, transparent 65%); pointer-events: none; }
 .hero-layout { display: grid; grid-template-columns: 1.13fr 1fr; gap: 54px; align-items: center; padding-bottom: 72px; }
 .hero-copy h1 { font-size: clamp(44px, 4.6vw, 60px); line-height: 1.105; letter-spacing: -.058em; font-weight: 650; }
-.hero-accent { color: #78baff; }
+.hero-accent {
+  color: #78baff;
+  background: linear-gradient(90deg, #78baff 0%, #00c2ff 45%, #ffffff 65%, #78baff 100%);
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: stopmotion-sheen 9s steps(9) infinite;
+}
 .hero-description { max-width: 500px; margin-top: 27px; font-size: 15px; line-height: 1.85; color: #a2b1c6; }
 .hero-visual { position: relative; padding-top: 14px; }
 .workspace-window { border: 1px solid #ffffff1c; border-radius: 16px; overflow: hidden; background: linear-gradient(145deg, #0a1c33, #041022); box-shadow: 0 25px 80px #00060e99, 0 0 80px -50px #027af1; }
@@ -151,9 +158,173 @@
 @keyframes stopmotion-tab-active { 0% { transform: scale(0.97); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 @keyframes stopmotion-num-tick { 0% { transform: translateX(0); } 50% { transform: translateX(3px); color: #00c2ff; } 100% { transform: translateX(2px); color: #85dfff; } }
 
+/* Live status beacon */
+.live-status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #00c2ff;
+  box-shadow: 0 0 8px #00c2ff;
+  animation: stopmotion-live-pulse 1.8s steps(2) infinite;
+}
+@keyframes stopmotion-live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+@keyframes stopmotion-sheen {
+  0% { background-position: 0% center; }
+  100% { background-position: 240% center; }
+}
+
+@keyframes stopmotion-arrow-tick {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(2px, -2px); }
+  100% { transform: translate(3px, -3px); }
+}
+
+/* Floating WhatsApp button radar & hover */
+.floating-whatsapp-btn {
+  position: relative;
+  transition: transform 140ms steps(2), background-color 140ms steps(2);
+}
+.floating-whatsapp-btn:hover {
+  transform: translateY(-2px) scale(1.08);
+  background-color: #12527b;
+  box-shadow: 0 0 24px -2px #00c2ff99, 0 8px 18px -4px #00000099;
+}
+.floating-whatsapp-beacon {
+  position: absolute;
+  inset: -5px;
+  border-radius: 9999px;
+  border: 1.5px solid #00c2ff;
+  pointer-events: none;
+  animation: stopmotion-beacon 3.2s steps(4) infinite;
+}
+.floating-whatsapp-status {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  border: 2px solid #000a18;
+  box-shadow: 0 0 6px #10b981;
+  animation: stopmotion-live-pulse 2s steps(2) infinite;
+}
+@keyframes stopmotion-beacon {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  25% { transform: scale(1.12); opacity: 0.6; }
+  50% { transform: scale(1.30); opacity: 0.25; }
+  75%, 100% { transform: scale(1.42); opacity: 0; }
+}
+
+/* Tactile interactive buttons */
+.button-primary {
+  transition: transform 140ms steps(2), box-shadow 140ms steps(2), background-color 140ms steps(2);
+}
+.button-primary:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px -4px #027af199;
+}
+.button-primary:active {
+  transform: translateY(0.5px) scale(0.98);
+}
+.button-primary:hover svg, .text-link:hover svg {
+  animation: stopmotion-arrow-tick 200ms steps(2) forwards;
+}
+.button-secondary {
+  transition: transform 140ms steps(2), border-color 140ms steps(2), background-color 140ms steps(2);
+}
+.button-secondary:hover {
+  transform: translateY(-1.5px);
+  border-color: #00c2ff88;
+  background-color: #ffffff0a;
+}
+
+/* Solution interactive section */
+.solution-detail-body {
+  animation: stopmotion-stage-snap 220ms steps(3) both;
+}
+.solution-option {
+  position: relative;
+  transition: color 140ms steps(2), padding-left 140ms steps(2);
+}
+.solution-option:hover {
+  padding-left: 6px;
+  color: #fff;
+}
+.solution-option:hover > svg {
+  color: #00c2ff;
+  animation: stopmotion-arrow-tick 200ms steps(2) forwards;
+}
+.solution-option[aria-pressed='true'] {
+  border-left: 2px solid #00c2ff;
+  padding-left: 10px;
+}
+.solution-option[aria-pressed='true'] > svg {
+  transform: translate(2px, -2px);
+}
+.capability-item {
+  transition: transform 140ms steps(2), color 140ms steps(2);
+}
+.capability-item:hover {
+  transform: translateX(3px);
+  color: #ffffff;
+}
+
+/* Deliverables list items */
+.deliverable-item {
+  transition: background-color 140ms steps(2), transform 140ms steps(2);
+  border-radius: 8px;
+  padding-inline: 8px;
+}
+.deliverable-item:hover {
+  background-color: #ffffff05;
+  transform: translateX(4px);
+}
+.deliverable-item:hover .deliverable-num {
+  animation: stopmotion-num-tick 180ms steps(2) forwards;
+}
+.deliverable-item:hover .deliverable-icon {
+  color: #00c2ff;
+  transform: scale(1.15) rotate(4deg);
+  transition: transform 140ms steps(2), color 140ms steps(2);
+}
+
+/* Commitments items */
+.commitment-item {
+  transition: transform 140ms steps(2), color 140ms steps(2);
+}
+.commitment-item:hover {
+  transform: translateX(4px);
+  color: #ffffff;
+}
+.commitment-item:hover span:first-child {
+  background-color: #00c2ff;
+  box-shadow: 0 0 8px #00c2ff;
+}
+
+/* Form input focus snap */
+input:focus, textarea:focus, select:focus {
+  animation: stopmotion-focus-snap 150ms steps(2) both;
+}
+@keyframes stopmotion-focus-snap {
+  0% { transform: scale(0.997); }
+  50% { transform: scale(1.003); }
+  100% { transform: scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html, html.scroll-smooth { scroll-behavior: auto !important; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .floating-whatsapp-beacon { display: none !important; }
 }
 
 /* Secondary text remains readable on the dark brand surfaces. */

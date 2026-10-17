@@ -6,9 +6,9 @@ export const SITE_INFO = {
   slogan: 'Transformamos datos en conocimiento',
   heroSubheadline: 'Análisis cuantitativo, cualitativo y multimodal para tu investigación, con resultados claros y acompañamiento personalizado',
   email: 'contacto@forvi.cl',
-  phoneDisplay: '+56 9 3577 9373',
-  phoneRaw: '56935779373',
-  whatsappUrl: `https://wa.me/56935779373?text=${encodeURIComponent('Hola FORVI, me gustaría solicitar una cotización para el análisis de mi proyecto.')}`,
+  phoneDisplay: '+56 9 4948 4118',
+  phoneRaw: '56949484118',
+  whatsappUrl: `https://wa.me/56949484118?text=${encodeURIComponent('Hola FORVI, me gustaría solicitar una cotización para el análisis de mi proyecto.')}`,
   socials: {
     instagram: 'https://www.instagram.com/forvi.cl/',
     facebook: 'https://www.facebook.com/forvi.cl/',

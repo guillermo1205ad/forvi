@@ -53,11 +53,11 @@ test('preserves the objective and special characters in the direct submission', 
 });
 
 test('WhatsApp starts with a brief quotation request without copying the freeform inquiry', () => {
-  const whatsappUrl = createContactWhatsAppLink('56935779373');
+  const whatsappUrl = createContactWhatsAppLink('56949484118');
   const parsed = new URL(whatsappUrl);
   const message = parsed.searchParams.get('text');
   assert.equal(parsed.origin, 'https://wa.me');
-  assert.equal(parsed.pathname, '/56935779373');
+  assert.equal(parsed.pathname, '/56949484118');
   assert.match(message, /cotizar el análisis de datos/);
   assert.ok(message.length < 150);
   assert.ok(!message.includes(inquiry.objetivo.trim()));
