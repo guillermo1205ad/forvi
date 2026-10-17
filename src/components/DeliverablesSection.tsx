@@ -61,9 +61,8 @@ export function DeliverablesSection() {
           <div>
             <p className="eyebrow">02 / QUÉ RECIBES</p>
             <h2 id="deliverables-title">
-              Resultados para entender.
-              <br />
-              <span className="text-forvi-blue-300">Y para seguir investigando.</span>
+              <span>Resultados para entender.</span>
+              <span className="block mt-1 text-forvi-blue-300 sm:mt-1.5">Y para seguir investigando.</span>
             </h2>
           </div>
           <p>

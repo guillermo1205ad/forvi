@@ -43,9 +43,8 @@ export function MethodologySection() {
           <div>
             <p className="eyebrow">03 / CÓMO TRABAJAMOS</p>
             <h2 id="method-title">
-              Un proceso claro.
-              <br />
-              <span className="text-slate-400">De la pregunta al resultado.</span>
+              <span>Un proceso claro.</span>
+              <span className="block mt-1 text-slate-400 sm:mt-1.5">De la pregunta al resultado.</span>
             </h2>
           </div>
           <p>

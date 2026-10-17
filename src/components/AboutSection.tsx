@@ -13,11 +13,10 @@ export function AboutSection() {
           <p className="eyebrow">{ABOUT_FORVI.eyebrow}</p>
           <h2
             id="about-title"
-            className="mt-5 text-3xl font-semibold leading-[1.18] tracking-[-.045em] sm:text-4xl lg:text-[44px]"
+            className="mt-5 text-3xl font-semibold leading-[1.3] tracking-[-0.02em] sm:text-4xl sm:leading-[1.28] lg:text-[44px] lg:leading-[1.26]"
           >
-            Conectar preguntas,
-            <br />
-            <span className="text-forvi-blue-300">métodos y contexto.</span>
+            <span>Conectar preguntas,</span>
+            <span className="block mt-1 text-forvi-blue-300 sm:mt-1.5">métodos y contexto.</span>
           </h2>
           <p className="mt-6 text-[15px] leading-7 text-slate-300">
             {ABOUT_FORVI.summary}

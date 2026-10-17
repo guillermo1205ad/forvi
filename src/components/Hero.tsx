@@ -19,9 +19,8 @@ export function Hero() {
               ANÁLISIS DE DATOS · INVESTIGACIÓN
             </p>
             <h1 id="hero-title">
-              Transformamos datos{' '}
-              <br />
-              <span className="hero-accent">en conocimiento</span>
+              <span>Transformamos datos</span>
+              <span className="hero-accent block mt-1 sm:mt-1.5">en conocimiento</span>
             </h1>
             <p className="hero-description">
               {SITE_INFO.heroSubheadline}

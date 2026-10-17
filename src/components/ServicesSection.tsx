@@ -93,9 +93,8 @@ export function ServicesSection() {
           <div>
             <p className="eyebrow">01 / ANÁLISIS PARA TU INVESTIGACIÓN</p>
             <h2 id="services-title">
-              Cada pregunta merece
-              <br />
-              <span className="text-slate-400">el análisis adecuado.</span>
+              <span>Cada pregunta merece</span>
+              <span className="block mt-1 text-slate-400 sm:mt-1.5">el análisis adecuado.</span>
             </h2>
           </div>
           <p>

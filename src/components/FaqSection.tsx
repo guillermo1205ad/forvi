@@ -13,11 +13,10 @@ export function FaqSection() {
           <p className="eyebrow">PREGUNTAS FRECUENTES</p>
           <h2
             id="faq-title"
-            className="mt-5 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-4xl"
+            className="mt-5 text-3xl font-semibold leading-[1.3] tracking-[-0.02em] sm:text-4xl sm:leading-[1.28]"
           >
-            Antes de empezar,
-            <br />
-            <span className="text-slate-400">conversemos las dudas.</span>
+            <span>Antes de empezar,</span>
+            <span className="block mt-1 text-slate-400 sm:mt-1.5">conversemos las dudas.</span>
           </h2>
           <p className="mt-5 text-sm leading-7 text-slate-400">
             Desde los tipos de datos hasta la explicación de resultados. Estas respuestas te
