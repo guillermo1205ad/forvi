@@ -26,7 +26,7 @@ El build comprueba TypeScript y genera `dist/`. Ejecutar pruebas y build antes d
 - `src/components/ServicesSection.tsx`: los cuatro servicios y sus capacidades, sujetos a pertinencia metodológica.
 - `src/components/DeliverablesSection.tsx`: informe, resultados, interpretación, supuestos, limitaciones y sesión explicativa, según cada propuesta.
 - `src/components/MethodologySection.tsx`: evaluación, acuerdo, análisis y entrega; una ronda de ajustes dentro del alcance.
-- `src/components/AboutSection.tsx`: enfoque profesional de Guillermo Peralta y credenciales secundarias.
+- `src/components/AboutSection.tsx`: enfoque institucional de FORVI y principios de consultoría técnica.
 - `src/components/ContactSection.tsx`: nombre, correo, objetivo, tipo de datos y plazo deseado. Sin archivos adjuntos, datos sensibles ni campos comerciales innecesarios.
 - `src/lib/contactSubmission.ts`: envío directo desde el navegador a Web3Forms. Solo confirma el envío con HTTP correcto y `success: true`; no abre la aplicación de correo ni redirige al visitante.
 - `src/index.css`: identidad visual, responsive, foco visible y movimiento reducido.

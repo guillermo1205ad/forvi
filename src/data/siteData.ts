@@ -12,24 +12,26 @@ export const SITE_INFO = {
   socials: {
     instagram: 'https://www.instagram.com/forvi.cl/',
     facebook: 'https://www.facebook.com/forvi.cl/',
-    linkedinFounder: 'https://www.linkedin.com/in/guillermo-peralta',
   },
   location: 'Santiago, Chile',
 };
 
-export const FOUNDER_CREDENTIALS = {
-  name: 'Guillermo Peralta',
-  role: 'Análisis de datos y metodología de investigación',
-  summary: 'Guillermo Peralta conecta preguntas de investigación con métodos de análisis y una comprensión del contexto empresarial, para que los resultados se puedan interpretar y utilizar con criterio.',
-  credentials: [
-    'Ingeniero Comercial',
-    'Licenciado en Ciencias de la Administración de Empresas',
-    'Magíster en Ciencias Empresariales con especialización en Emprendimiento',
-    'Dr. (c). en Computación, Pontificia Universidad Católica de Chile',
-    'Especialista en IA multimodal',
+export const ABOUT_FORVI = {
+  eyebrow: '04 / SOBRE FORVI',
+  name: 'FORVI',
+  legalName: 'FORVI SpA',
+  role: 'Consultoría en análisis de datos y metodología de investigación',
+  tagline: 'Rigor analítico, criterio metodológico y acompañamiento técnico para resolver preguntas complejas de investigación.',
+  summary: 'FORVI conecta preguntas de investigación con métodos de análisis rigurosos y una comprensión integral del contexto, para que los resultados se puedan interpretar, discutir y utilizar con fundamento.',
+  commitments: [
+    'Rigor metodológico y reproducibilidad de resultados',
+    'Confidencialidad absoluta de bases de datos y antecedentes',
+    'Entregables claros, estructurados y con código documentado',
+    'Interpretación fundamentada de modelos y hallazgos estadísticos',
+    'Respeto irrestricto a los estándares éticos e institucionales',
   ],
-  linkedin: 'https://www.linkedin.com/in/guillermo-peralta',
 };
+
 
 export const FAQ_ITEMS = [
   {

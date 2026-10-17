@@ -1,4 +1,4 @@
-import { FOUNDER_CREDENTIALS } from '../data/siteData';
+import { ABOUT_FORVI } from '../data/siteData';
 import { IconRenderer } from './IconRenderer';
 
 export function AboutSection() {
@@ -10,7 +10,7 @@ export function AboutSection() {
     >
       <div className="section-shell about-panel">
         <div>
-          <p className="eyebrow">04 / QUIÉN ESTÁ DETRÁS</p>
+          <p className="eyebrow">{ABOUT_FORVI.eyebrow}</p>
           <h2
             id="about-title"
             className="mt-5 text-3xl font-semibold leading-[1.18] tracking-[-.045em] sm:text-4xl lg:text-[44px]"
@@ -20,7 +20,7 @@ export function AboutSection() {
             <span className="text-forvi-blue-300">métodos y contexto.</span>
           </h2>
           <p className="mt-6 text-[15px] leading-7 text-slate-300">
-            {FOUNDER_CREDENTIALS.summary}
+            {ABOUT_FORVI.summary}
           </p>
           <p className="mt-4 text-sm leading-7 text-slate-400">
             El acompañamiento combina una mirada metodológica con la comprensión del contexto
@@ -36,7 +36,7 @@ export function AboutSection() {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-white">Acompañamiento personal</p>
+              <p className="text-sm font-medium text-white">Acompañamiento técnico</p>
               <p className="mt-2 text-xs leading-6 text-slate-400">
                 Un espacio para comprender y discutir tus resultados.
               </p>
@@ -60,42 +60,54 @@ export function AboutSection() {
                 height="42"
                 className="h-11 w-9 object-contain"
               />
-              <span className="text-sm font-semibold tracking-[.18em] text-white">FORVI</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-semibold tracking-[.18em] text-white">FORVI</span>
+                <span className="font-mono text-[10px] text-forvi-cyan-400">SpA</span>
+              </div>
             </div>
-            <a
-              href={FOUNDER_CREDENTIALS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ver trayectoria de Guillermo Peralta en LinkedIn (abre en una nueva pestaña)"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition-colors hover:border-forvi-blue-400 hover:text-white"
-            >
-              <IconRenderer name="Linkedin" className="h-4 w-4" />
-            </a>
+            <span className="rounded-full border border-forvi-blue-400/30 bg-forvi-blue-950/70 px-3 py-1 text-[11px] font-medium text-forvi-cyan-300">
+              Consultoría técnica
+            </span>
           </div>
 
           <h3 className="text-2xl font-semibold tracking-tight text-white">
-            {FOUNDER_CREDENTIALS.name}
+            {ABOUT_FORVI.name}
           </h3>
           <p className="mt-2 text-sm leading-6 text-forvi-blue-300">
-            {FOUNDER_CREDENTIALS.role}
+            {ABOUT_FORVI.role}
+          </p>
+          <p className="mt-3 text-xs leading-6 text-slate-300">
+            {ABOUT_FORVI.tagline}
           </p>
 
           <p className="mt-7 text-[10px] font-medium uppercase tracking-[.16em] text-slate-400">
-            Formación y especialización
+            Principios y compromisos de trabajo
           </p>
           <ul className="mt-4 space-y-3">
-            {FOUNDER_CREDENTIALS.credentials.map(credential => (
+            {ABOUT_FORVI.commitments.map(commitment => (
               <li
-                key={credential}
+                key={commitment}
                 className="flex items-start gap-3 text-xs leading-6 text-slate-300"
               >
                 <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-forvi-blue-400" />
-                {credential}
+                {commitment}
               </li>
             ))}
           </ul>
+
+          <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-slate-400">
+            <span>Santiago, Chile</span>
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-1.5 font-medium text-forvi-cyan-300 transition-colors hover:text-white"
+            >
+              <span>Consultar proyecto</span>
+              <IconRenderer name="ArrowRight" className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
