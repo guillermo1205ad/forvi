@@ -141,18 +141,19 @@
   .brand-art { min-height: 240px; }
 }
 @media (max-width: 389px) {
-  .site-header .section-shell { padding-inline: 18px; gap: 10px; }
+  .section-shell { padding-inline: 16px; }
+  .site-header .section-shell { padding-inline: 14px; gap: 8px; }
   .site-header a[aria-label="FORVI, inicio"] { gap: 6px; }
-  .site-header a[aria-label="FORVI, inicio"] img { width: 30px; height: 36px; }
-  .site-header a[aria-label="FORVI, inicio"] span { font-size: 22px; }
-  .site-header .nav-cta { min-height: 40px; padding-inline: 12px; }
+  .site-header a[aria-label="FORVI, inicio"] img { width: 28px; height: 34px; }
+  .site-header a[aria-label="FORVI, inicio"] span { font-size: 21px; }
+  .site-header .nav-cta { min-height: 38px; padding-inline: 10px; font-size: 11px; }
   .site-header .nav-cta svg { display: none; }
   .site-header button { flex-shrink: 0; }
-  .hero-copy h1 { font-size: 38px; }
+  .hero-copy h1 { font-size: 36px; }
   .workspace-tabs button { font-size: 10px; }
-  .workspace-content { padding: 22px 16px; }
+  .workspace-content { padding: 20px 14px; }
   .process-grid { grid-template-columns: 1fr; }
-  .button-primary, .button-secondary { padding-inline: 15px; font-size: 12px; }
+  .button-primary, .button-secondary { padding-inline: 14px; font-size: 12px; }
 }
 
 /* Stop-motion tactile micro-animations */
@@ -252,7 +253,8 @@
 }
 .solution-option {
   position: relative;
-  transition: color 140ms steps(2), padding-left 140ms steps(2);
+  border-left: 2px solid transparent;
+  transition: color 140ms steps(2), border-color 140ms steps(2), padding-left 140ms steps(2);
 }
 .solution-option:hover {
   padding-left: 6px;
@@ -263,29 +265,27 @@
   animation: stopmotion-arrow-tick 200ms steps(2) forwards;
 }
 .solution-option[aria-pressed='true'] {
-  border-left: 2px solid #00c2ff;
+  border-left-color: #00c2ff;
   padding-left: 10px;
 }
 .solution-option[aria-pressed='true'] > svg {
   transform: translate(2px, -2px);
 }
 .capability-item {
-  transition: transform 140ms steps(2), color 140ms steps(2);
+  transition: color 140ms steps(2);
 }
 .capability-item:hover {
-  transform: translateX(3px);
   color: #ffffff;
 }
 
 /* Deliverables list items */
 .deliverable-item {
-  transition: background-color 140ms steps(2), transform 140ms steps(2);
+  transition: background-color 140ms steps(2);
   border-radius: 8px;
   padding-inline: 8px;
 }
 .deliverable-item:hover {
-  background-color: #ffffff05;
-  transform: translateX(4px);
+  background-color: #ffffff0a;
 }
 .deliverable-item:hover .deliverable-num {
   animation: stopmotion-num-tick 180ms steps(2) forwards;
@@ -298,15 +298,16 @@
 
 /* Commitments items */
 .commitment-item {
-  transition: transform 140ms steps(2), color 140ms steps(2);
+  transition: color 140ms steps(2);
 }
 .commitment-item:hover {
-  transform: translateX(4px);
   color: #ffffff;
 }
 .commitment-item:hover span:first-child {
   background-color: #00c2ff;
   box-shadow: 0 0 8px #00c2ff;
+  transform: scale(1.3);
+  transition: transform 140ms steps(2), background-color 140ms steps(2);
 }
 
 /* Form input focus snap */

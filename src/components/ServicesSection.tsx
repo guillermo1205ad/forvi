@@ -168,7 +168,7 @@ export function ServicesSection() {
 
         <a
           href="#contacto"
-          className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[.02] px-6 py-5 text-sm text-slate-300 transition-colors hover:border-forvi-blue-400/40"
+          className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[.02] px-4 sm:px-6 py-4 sm:py-5 text-sm text-slate-300 transition-colors hover:border-forvi-blue-400/40"
         >
           <span>
             ¿No sabes qué análisis necesitas?{' '}

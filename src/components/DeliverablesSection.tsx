@@ -30,9 +30,9 @@ const ANALYSIS_DELIVERABLES = [
 ];
 
 const PREVIEW_TABS = [
-  { id: 'tabla', label: 'Tabla (APA 7)', icon: 'ChartColumn' },
-  { id: 'grafico', label: 'Gráfico analítico', icon: 'BarChart3' },
-  { id: 'informe', label: 'Informe técnico', icon: 'FileSearch' },
+  { id: 'tabla', shortLabel: 'Tabla APA', label: 'Tabla (APA 7)', icon: 'ChartColumn' },
+  { id: 'grafico', shortLabel: 'Gráfico', label: 'Gráfico analítico', icon: 'BarChart3' },
+  { id: 'informe', shortLabel: 'Informe', label: 'Informe técnico', icon: 'FileSearch' },
 ] as const;
 
 const TECHNICAL_STANDARDS = [
@@ -74,7 +74,7 @@ export function DeliverablesSection() {
 
         <div className="grid gap-8 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
           {/* Interactive Deliverable Sample Viewer */}
-          <div className="flex flex-col justify-between rounded-2xl border border-forvi-blue-400/25 bg-[#071a32]/80 p-5 sm:p-7 shadow-xl">
+          <div className="flex flex-col justify-between rounded-2xl border border-forvi-blue-400/25 bg-[#071a32]/80 p-4 sm:p-7 shadow-xl">
             <div>
               <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
                 <div className="flex items-center gap-2">
@@ -95,14 +95,15 @@ export function DeliverablesSection() {
                     role="tab"
                     aria-selected={activePreview === tab.id}
                     onClick={() => setActivePreview(tab.id)}
-                    className={`flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-[11px] font-medium transition-all ${
+                    className={`flex items-center justify-center gap-1.5 rounded-md px-1.5 sm:px-2 py-2 text-[10.5px] sm:text-[11px] font-medium transition-all ${
                       activePreview === tab.id
                         ? 'bg-forvi-blue-600/30 text-forvi-cyan-300 border border-forvi-blue-400/40 shadow-sm'
                         : 'text-slate-400 hover:text-white hover:bg-white/[.04]'
                     }`}
                   >
-                    <IconRenderer name={tab.icon} className="h-3.5 w-3.5" />
-                    <span className="truncate">{tab.label}</span>
+                    <IconRenderer name={tab.icon} className="h-3.5 w-3.5 shrink-0" />
+                    <span className="sm:hidden">{tab.shortLabel}</span>
+                    <span className="hidden sm:inline">{tab.label}</span>
                   </button>
                 ))}
               </div>
@@ -113,38 +114,38 @@ export function DeliverablesSection() {
                   <p className="font-medium text-slate-200 text-[11px] mb-2.5 italic">
                     Tabla 1. Estadísticos descriptivos y prueba t para muestras independientes
                   </p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left font-mono text-[10px] text-slate-300">
+                  <div className="overflow-x-auto pb-1">
+                    <table className="w-full min-w-[420px] text-left font-mono text-[10px] text-slate-300 whitespace-nowrap">
                       <thead>
                         <tr className="border-b-2 border-white/30 text-white">
-                          <th className="py-1">Dimensión</th>
-                          <th className="py-1 text-center">M (DE) Grupo A</th>
-                          <th className="py-1 text-center">M (DE) Grupo B</th>
-                          <th className="py-1 text-right">t(118)</th>
-                          <th className="py-1 text-right">p</th>
+                          <th className="py-1.5 px-2">Dimensión</th>
+                          <th className="py-1.5 px-2 text-center">M (DE) Grupo A</th>
+                          <th className="py-1.5 px-2 text-center">M (DE) Grupo B</th>
+                          <th className="py-1.5 px-2 text-right">t(118)</th>
+                          <th className="py-1.5 px-2 text-right">p</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-white/10">
                         <tr>
-                          <td className="py-1.5 font-sans">Motivación intrínseca</td>
-                          <td className="py-1.5 text-center">4.32 (0.58)</td>
-                          <td className="py-1.5 text-center">3.41 (0.72)</td>
-                          <td className="py-1.5 text-right">7.62</td>
-                          <td className="py-1.5 text-right text-forvi-cyan-300 font-semibold">&lt; .001</td>
+                          <td className="py-2 px-2 font-sans">Motivación intrínseca</td>
+                          <td className="py-2 px-2 text-center">4.32 (0.58)</td>
+                          <td className="py-2 px-2 text-center">3.41 (0.72)</td>
+                          <td className="py-2 px-2 text-right">7.62</td>
+                          <td className="py-2 px-2 text-right text-forvi-cyan-300 font-semibold">&lt; .001</td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 font-sans">Compromiso conductual</td>
-                          <td className="py-1.5 text-center">3.88 (0.64)</td>
-                          <td className="py-1.5 text-center">3.52 (0.69)</td>
-                          <td className="py-1.5 text-right">2.98</td>
-                          <td className="py-1.5 text-right text-forvi-cyan-300 font-semibold">.003</td>
+                          <td className="py-2 px-2 font-sans">Compromiso conductual</td>
+                          <td className="py-2 px-2 text-center">3.88 (0.64)</td>
+                          <td className="py-2 px-2 text-center">3.52 (0.69)</td>
+                          <td className="py-2 px-2 text-right">2.98</td>
+                          <td className="py-2 px-2 text-right text-forvi-cyan-300 font-semibold">.003</td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 font-sans">Autoeficacia percibida</td>
-                          <td className="py-1.5 text-center">4.15 (0.51)</td>
-                          <td className="py-1.5 text-center">3.60 (0.66)</td>
-                          <td className="py-1.5 text-right">5.14</td>
-                          <td className="py-1.5 text-right text-forvi-cyan-300 font-semibold">&lt; .001</td>
+                          <td className="py-2 px-2 font-sans">Autoeficacia percibida</td>
+                          <td className="py-2 px-2 text-center">4.15 (0.51)</td>
+                          <td className="py-2 px-2 text-center">3.60 (0.66)</td>
+                          <td className="py-2 px-2 text-right">5.14</td>
+                          <td className="py-2 px-2 text-right text-forvi-cyan-300 font-semibold">&lt; .001</td>
                         </tr>
                       </tbody>
                     </table>
@@ -158,9 +159,9 @@ export function DeliverablesSection() {
               {/* Tab 2: Gráfico analítico */}
               {activePreview === 'grafico' && (
                 <div className="solution-detail-body rounded-xl border border-white/10 bg-[#000a18]/60 p-4">
-                  <div className="flex items-center justify-between text-[11px] mb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-[11px] mb-3">
                     <span className="font-medium text-slate-200">Figura 1. Efecto estimado e Intervalos de Confianza (IC 95%)</span>
-                    <span className="text-[10px] text-forvi-cyan-300 font-mono">Significativo (p &lt; .001)</span>
+                    <span className="text-[10px] text-forvi-cyan-300 font-mono self-start sm:self-auto">Significativo (p &lt; .001)</span>
                   </div>
                   <div className="space-y-3 font-mono text-[10px]">
                     <div>
@@ -234,8 +235,8 @@ export function DeliverablesSection() {
         </div>
 
         {/* Technical Standards & Compatibility Pills */}
-        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[.02] p-6 sm:p-7">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[.02] p-4 sm:p-6 lg:p-7">
+          <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-forvi-cyan-400" />
               <h3 className="text-xs font-semibold uppercase tracking-wider text-white">

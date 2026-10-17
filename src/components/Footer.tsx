@@ -77,7 +77,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-2">
               <a
                 href={`mailto:${SITE_INFO.email}`}
-                className="inline-block py-1 text-lg font-medium text-white hover:text-forvi-cyan-300"
+                className="inline-block py-1 text-base sm:text-lg font-medium text-white hover:text-forvi-cyan-300 break-all"
               >
                 {SITE_INFO.email}
               </a>
@@ -85,7 +85,7 @@ export function Footer() {
                 type="button"
                 onClick={handleCopyEmail}
                 aria-label="Copiar correo de FORVI al portapapeles"
-                className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-slate-300 transition-colors hover:border-forvi-blue-400 hover:text-white"
+                className="inline-flex shrink-0 items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-slate-300 transition-colors hover:border-forvi-blue-400 hover:text-white"
               >
                 <IconRenderer name={copied ? 'Check' : 'Copy'} className="h-3 w-3 text-forvi-cyan-300" />
                 <span>{copied ? 'Copiado' : 'Copiar'}</span>
@@ -106,11 +106,11 @@ export function Footer() {
             </a>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pb-12 pt-7 text-[11px] sm:pb-0">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-white/10 pb-14 sm:pb-0 pt-7 text-[11px]">
           <p>© {new Date().getFullYear()} {SITE_INFO.legalName}. Todos los derechos reservados.</p>
           <a
             href="#inicio"
-            className="mr-12 flex min-h-11 items-center gap-2 hover:text-white"
+            className="flex min-h-11 items-center gap-2 hover:text-white sm:mr-12"
           >
             Volver al inicio <IconRenderer name="ArrowUp" className="h-3.5 w-3.5" />
           </a>

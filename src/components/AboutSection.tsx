@@ -49,7 +49,7 @@ export function AboutSection() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#071a32]/60 p-6 sm:p-8">
+        <div className="rounded-2xl border border-white/10 bg-[#071a32]/60 p-4 sm:p-6 lg:p-8">
           <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-6">
             <div className="flex items-center gap-3">
               <img

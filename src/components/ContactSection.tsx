@@ -197,7 +197,7 @@ export function ContactSection() {
 
         <div className="grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
           <div className="space-y-7">
-            <div className="rounded-2xl border border-white/10 bg-[#071a32] p-6 sm:p-8">
+            <div className="rounded-2xl border border-white/10 bg-[#071a32] p-4 sm:p-6 lg:p-8">
               <h3 className="text-xl font-semibold text-white">¿Prefieres conversar directamente?</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-400">
                 Escríbenos por el canal que te resulte más cómodo.
@@ -207,7 +207,7 @@ export function ContactSection() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex min-h-20 items-center gap-4 rounded-xl border border-white/10 bg-[#000A18]/50 p-4 transition-colors hover:border-[#027AF1]/60"
+                  className="group flex min-h-20 items-center gap-3.5 sm:gap-4 rounded-xl border border-white/10 bg-[#000A18]/50 p-3.5 sm:p-4 transition-colors hover:border-[#027AF1]/60"
                 >
                   <MessageSquare aria-hidden="true" className="h-5 w-5 shrink-0 text-[#59aeff]" />
                   <span className="min-w-0 flex-1">
@@ -218,10 +218,10 @@ export function ContactSection() {
                   </span>
                   <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1" />
                 </a>
-                <div className="group flex min-h-20 items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#000A18]/50 p-4 transition-colors hover:border-[#027AF1]/60">
+                <div className="group flex min-h-20 flex-wrap sm:flex-nowrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#000A18]/50 p-3.5 sm:p-4 transition-colors hover:border-[#027AF1]/60">
                   <a
                     href={`mailto:${SITE_INFO.email}`}
-                    className="flex min-w-0 flex-1 items-center gap-4"
+                    className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4"
                   >
                     <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-[#59aeff]" />
                     <span className="min-w-0 flex-1">
@@ -281,7 +281,7 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-[#071a32] p-6 sm:p-8">
+          <div className="rounded-2xl border border-white/10 bg-[#071a32] p-4 sm:p-6 lg:p-8">
             {status === 'success' ? (
               <div>
                 <h3
@@ -343,7 +343,7 @@ export function ContactSection() {
                 </p>
 
                 {/* 3-Click Project Orientation Helper */}
-                <div className="my-6 rounded-2xl border border-forvi-blue-400/25 bg-[#001026]/80 p-4 sm:p-5 shadow-inner">
+                <div className="my-6 rounded-2xl border border-forvi-blue-400/25 bg-[#001026]/80 p-3.5 sm:p-5 shadow-inner">
                   <div className="flex items-center justify-between gap-2 mb-2">
                     <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-forvi-cyan-300 font-semibold">
                       <Sparkles className="h-3.5 w-3.5" />
@@ -355,16 +355,16 @@ export function ContactSection() {
                     ¿No tienes claro qué escribir? Selecciona tus 3 opciones y preparamos tu consulta al instante:
                   </p>
 
-                  <div className="space-y-3 text-xs">
+                  <div className="space-y-3.5 text-xs">
                     <div>
                       <span className="text-[11px] font-medium text-slate-400 block mb-1.5">1. Tipo de estudio:</span>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {SCOPE_OPTIONS.map(opt => (
                           <button
                             key={opt.id}
                             type="button"
                             onClick={() => setOrientScope(opt.id)}
-                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                            className={`rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition-all ${
                               orientScope === opt.id
                                 ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
                                 : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
@@ -378,13 +378,13 @@ export function ContactSection() {
 
                     <div>
                       <span className="text-[11px] font-medium text-slate-400 block mb-1.5">2. Estado de tus fuentes:</span>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {DATA_OPTIONS.map(opt => (
                           <button
                             key={opt.id}
                             type="button"
                             onClick={() => setOrientData(opt.id)}
-                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                            className={`rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition-all ${
                               orientData === opt.id
                                 ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
                                 : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
@@ -398,13 +398,13 @@ export function ContactSection() {
 
                     <div>
                       <span className="text-[11px] font-medium text-slate-400 block mb-1.5">3. Plazo estimado:</span>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {TIMELINE_OPTIONS.map(opt => (
                           <button
                             key={opt.id}
                             type="button"
                             onClick={() => setOrientTimeline(opt.id)}
-                            className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all ${
+                            className={`rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition-all ${
                               orientTimeline === opt.id
                                 ? 'bg-forvi-blue-600 text-white border border-forvi-cyan-300/50 shadow-sm'
                                 : 'bg-white/5 text-slate-300 border border-white/10 hover:border-white/20 hover:text-white'
@@ -418,16 +418,16 @@ export function ContactSection() {
                   </div>
 
                   {orientScope && orientData && (
-                    <div className="mt-4 pt-3.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                    <div className="mt-4 pt-3.5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <span className="text-[11px] text-forvi-cyan-300 flex items-center gap-1.5">
-                        <Check className="h-3.5 w-3.5" />
-                        Propuesta lista para autocompletar
+                        <Check className="h-3.5 w-3.5 shrink-0" />
+                        <span>Propuesta lista para autocompletar</span>
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                         <button
                           type="button"
                           onClick={handleApplyOrientation}
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-forvi-blue-600 hover:bg-forvi-blue-500 border border-forvi-cyan-400/50 px-3 py-1.5 text-xs font-semibold text-white transition-all shadow-md"
+                          className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-lg bg-forvi-blue-600 hover:bg-forvi-blue-500 border border-forvi-cyan-400/50 px-3.5 py-2 text-xs font-semibold text-white transition-all shadow-md active:scale-95"
                         >
                           <span>Rellenar formulario ↓</span>
                         </button>
@@ -435,9 +435,9 @@ export function ContactSection() {
                           href={orientWhatsAppUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-[#00c2ff]/15 hover:bg-[#00c2ff]/25 border border-[#00c2ff]/40 px-3 py-1.5 text-xs font-semibold text-forvi-cyan-300 transition-all"
+                          className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-lg bg-[#00c2ff]/15 hover:bg-[#00c2ff]/25 border border-[#00c2ff]/40 px-3.5 py-2 text-xs font-semibold text-forvi-cyan-300 transition-all active:scale-95"
                         >
-                          <MessageSquare className="h-3 w-3" />
+                          <MessageSquare className="h-3.5 w-3.5" />
                           <span>WhatsApp directo ↗</span>
                         </a>
                       </div>
